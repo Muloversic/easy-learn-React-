@@ -1,23 +1,94 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import "./scss/index.scss";
+import Header from "./components/Header";
+import Settings from "./components/Settings";
+import Sets from "./components/Sets";
 function App() {
+  const subLinks = [
+    {
+      subSets: {
+        href: "/sets",
+        icon: "format_align_left",
+      },
+      subProfile: {
+        href: "/profile",
+        icon: "person_outline",
+      },
+      subSettings: {
+        href: "/settings",
+        icon: "settings",
+      },
+    },
+  ];
+  const links = [
+    {
+      value: "EasyLearn",
+      href: "/",
+      icon: "book",
+    },
+    {
+      value: {
+        //key represtns current page
+        settings: {
+          subValue: "settings",
+        },
+        sets: {
+          subValue: "Add new set +",
+        },
+        profile: {
+          subValue: "profile",
+        },
+      },
+    },
+  ];
+  // const links = [
+  //   {
+  //     value: "EasyLearn",
+  //     href: "/",
+  //     icon: "",
+  //   },
+  //   {
+  //     value: {
+  //       settings: "settings",
+  //       profile: "profile",
+  //       new: "add new set +",
+  //     },
+  //     href: {
+  //       settings: "settings",
+  //       profile: "profile",
+  //       new: "/",
+  //     },
+  //   },
+  //   {
+  //     submenu: {
+  //       sets: {
+  //         value: "sets",
+  //         href: "/",
+  //         icon: "",
+  //       },
+  //       profile: {
+  //         value: "profile",
+  //         href: "/profile",
+  //         icon: "",
+  //       },
+  //       settings: {
+  //         value: "settings",
+  //         href: "/settings",
+  //         icon: "",
+  //       },
+  //     },
+  //   },
+  // ];
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Header links={links} subLinks={subLinks}/>
+        <Routes>
+          <Route path="/" />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/sets" element={<Sets />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
