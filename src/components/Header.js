@@ -25,6 +25,7 @@ export default function Header({ links, subLinks }) {
       for (let subItem in link.value) {
         if (subItem === page) {
           title = link.value[subItem].subValue;
+          href = link.value[subItem].href;
         }
       }
     }

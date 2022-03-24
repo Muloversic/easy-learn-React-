@@ -3,6 +3,7 @@ import "./scss/index.scss";
 import Header from "./components/Header";
 import Settings from "./components/Settings";
 import Sets from "./components/Sets";
+import NewSet from "./components/NewSet";
 function App() {
   const subLinks = [
     {
@@ -38,9 +39,13 @@ function App() {
         },
         sets: {
           subValue: "Add new set +",
+          href:'/new-set'
         },
         profile: {
           subValue: "profile",
+        },
+        ['new-set']: {
+          subValue: "Creating new set",
         },
       },
     },
@@ -54,6 +59,7 @@ function App() {
           <Route path="/" />
           <Route path="/settings" element={<Settings />} />
           <Route path="/sets" element={<Sets />} />
+          <Route path="/new-set" element={<NewSet />} />
         </Routes>
       </Router>
     </div>
