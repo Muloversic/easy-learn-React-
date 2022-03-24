@@ -18,9 +18,15 @@ function App() {
       icon: "settings",
     },
   ];
+
   const links = [
+    //value should be string
     {
       value: "EasyLearn",
+      href: "/",
+    },
+    {
+      value:'',
       href: "/",
       icon: "book",
     },
@@ -39,44 +45,7 @@ function App() {
       },
     },
   ];
-  // const links = [
-  //   {
-  //     value: "EasyLearn",
-  //     href: "/",
-  //     icon: "",
-  //   },
-  //   {
-  //     value: {
-  //       settings: "settings",
-  //       profile: "profile",
-  //       new: "add new set +",
-  //     },
-  //     href: {
-  //       settings: "settings",
-  //       profile: "profile",
-  //       new: "/",
-  //     },
-  //   },
-  //   {
-  //     submenu: {
-  //       sets: {
-  //         value: "sets",
-  //         href: "/",
-  //         icon: "",
-  //       },
-  //       profile: {
-  //         value: "profile",
-  //         href: "/profile",
-  //         icon: "",
-  //       },
-  //       settings: {
-  //         value: "settings",
-  //         href: "/settings",
-  //         icon: "",
-  //       },
-  //     },
-  //   },
-  // ];
+
   return (
     <div className="App">
       <Router>

@@ -1,10 +1,45 @@
 $base-color: #191A35;
+$white: #fff;
 .header{
-   
+  
 }
 .navigation{
-    &__list{}
-    &__sublist{}
-    &__item{}
-    &__link{}
+  display: flex;
+  justify-content: center;
+    &__burger{
+        // display: none;
+        display: flex;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 40px;
+        background-color: rgb(164, 155, 252);
+        &-handle{
+            color: $white;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+        }
+    }
+    &__list{
+        display: flex;
+        align-items: center;
+    }
+    &__sublist{
+        display: flex;
+        align-items: center;
+    }
+    &__item{
+        color: $white;
+        display: none;
+        &--burger{
+            display: block;
+            position: absolute;
+        }
+    }
+    &__link{
+        color: inherit;
+    }
 }

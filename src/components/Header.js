@@ -4,7 +4,7 @@ export default function Header({ links, subLinks }) {
     return (
       <li className="navigation__item">
         <a href={links.href} className="navigation__link">
-          <i className="large material-icons">{links.icon}</i>
+          <i className=" material-icons">{links.icon}</i>
         </a>
       </li>
     );
@@ -31,7 +31,7 @@ export default function Header({ links, subLinks }) {
       <li className="navigation__item">
         <a href={href} className="navigation__link">
           {title}
-          <i className="large material-icons">{icon}</i>
+          <i className="smaterial-icons">{icon}</i>
         </a>
       </li>
     );
@@ -40,6 +40,9 @@ export default function Header({ links, subLinks }) {
   return (
     <header className="header">
       <nav className="header__navigation navigation">
+        <div className="navigation__burger">
+          <button className="material-icons navigation__burger-handle">drag_handle</button>
+        </div>
         <ul className="navigation__list">
           {linkItems}
           <li className="navigation__item">
