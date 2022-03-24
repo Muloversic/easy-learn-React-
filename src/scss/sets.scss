@@ -31,8 +31,9 @@ $white: #fff;
     &__list{
         display: flex;
         align-items: center;
+        position: fixed;
         &--active{
-            position: fixed;
+         
         }
     }
     &__sublist{

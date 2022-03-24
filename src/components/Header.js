@@ -56,19 +56,17 @@ export default function Header({ links, subLinks }) {
   // open burger menu func
   function openMenu(event) {
     const burgerItem = document.querySelector(".navigation__burger");
-    const navList = document.querySelector(".navigation__list");
     setBurger((prevState) => !prevState);
     [...navItems].forEach((navItem, index) => {
       if (burger) {
         navItem.classList.remove("navigation__item--active");
-        navList.classList.remove("navigation__list--active");
         if (index === 2) {
           navItem.classList.add("navigation__item--active");
         }
         burgerItem.classList.remove("navigation__burger--active");
       } else {
         navItem.classList.add("navigation__item--active");
-        navList.classList.add("navigation__list--active");
+
         if (index === 2) {
           navItem.classList.remove("navigation__item--active");
         }
