@@ -1,30 +1,12 @@
 export default function Header({ links, subLinks }) {
   const page = window.location.pathname.slice(1);
-
-  const subItemLinks = subLinks.map((link) => {
-    let subIcons = [];
-    let hrefs = [];
-    let links = ''
-    for (let subLink in link) {
-      subIcons.push(link[subLink].icon)
-      hrefs.push(link[subLink].hre)
-    }
-
-    const foo = subIcons.map(link=>{
-        links = link
-       
-    })
-    console.log(links)
-   
-
+  const subItemLinks = subLinks.map((links) => {
     return (
-      <ul className="navigation__sublist">
-        <li className="navigation__item">
-          <a href={hrefs} className="navigation__link">
-            <i className="large material-icons">{subIcons}</i>
-          </a>
-        </li>
-      </ul>
+      <li className="navigation__item">
+        <a href={links.href} className="navigation__link">
+          <i className="large material-icons">{links.icon}</i>
+        </a>
+      </li>
     );
   });
 
@@ -60,7 +42,9 @@ export default function Header({ links, subLinks }) {
       <nav className="header__navigation navigation">
         <ul className="navigation__list">
           {linkItems}
-          <li className="navigation__item">{subItemLinks}</li>
+          <li className="navigation__item">
+            <ul className="navigation__sublist">{subItemLinks}</ul>
+          </li>
         </ul>
       </nav>
     </header>

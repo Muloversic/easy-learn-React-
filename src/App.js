@@ -6,18 +6,16 @@ import Sets from "./components/Sets";
 function App() {
   const subLinks = [
     {
-      subSets: {
-        href: "/sets",
-        icon: "format_align_left",
-      },
-      subProfile: {
-        href: "/profile",
-        icon: "person_outline",
-      },
-      subSettings: {
-        href: "/settings",
-        icon: "settings",
-      },
+      href: "/sets",
+      icon: "format_align_left",
+    },
+    {
+      href: "/profile",
+      icon: "person_outline",
+    },
+    {
+      href: "/settings",
+      icon: "settings",
     },
   ];
   const links = [
@@ -82,7 +80,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Header links={links} subLinks={subLinks}/>
+        <Header links={links} subLinks={subLinks} />
         <Routes>
           <Route path="/" />
           <Route path="/settings" element={<Settings />} />
