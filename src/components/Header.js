@@ -1,4 +1,6 @@
+import { React, useState, useEffect } from "react";
 export default function Header({ links, subLinks }) {
+  const [burger, setBurger] = useState(false);
   const page = window.location.pathname.slice(1);
   const subItemLinks = subLinks.map((links) => {
     return (
@@ -31,18 +33,54 @@ export default function Header({ links, subLinks }) {
       <li className="navigation__item">
         <a href={href} className="navigation__link">
           {title}
-          <i className="smaterial-icons">{icon}</i>
+          <i className="material-icons">{icon}</i>
         </a>
       </li>
     );
   });
 
+  let navItems = [];
+  useEffect(() => {
+    navItems = document.querySelectorAll(".navigation__item");
+  }, [burger]);
+  
+  //button add new set is always on the display
+    [...navItems].forEach((navItem, index) => {
+      if (index === 2) {
+        navItem.classList.add("navigation__item--active");
+      }
+    });
+  // open burger menu func
+  function openMenu(event) {
+    const burgerItem = document.querySelector(".navigation__burger");
+    setBurger((prevState) => !prevState);
+    [...navItems].forEach((navItem, index) => {
+      if (burger) {
+        navItem.classList.remove("navigation__item--active");
+        if (index === 2) {
+          navItem.classList.add("navigation__item--active");
+        }
+        burgerItem.classList.remove("navigation__burger--active");
+      } else {
+        navItem.classList.add("navigation__item--active");
+        if (index === 2) {
+          navItem.classList.remove("navigation__item--active");
+        }
+        burgerItem.classList.add("navigation__burger--active");
+      }
+    });
+  }
+
   return (
     <header className="header">
       <nav className="header__navigation navigation">
-        <div className="navigation__burger">
-          <button className="material-icons navigation__burger-handle">drag_handle</button>
-        </div>
+        <button
+          onClick={openMenu}
+          className="material-icons navigation__burger-btn"
+        >
+          drag_handle
+        </button>
+        <div className="navigation__burger"></div>
         <ul className="navigation__list">
           {linkItems}
           <li className="navigation__item">
