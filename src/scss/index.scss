@@ -1,5 +1,6 @@
-@import url(sets.scss);
 @import url(reset.scss);
+@import url(sets.scss);
+@import url(header.scss);
 $base-color: #191a35;
 body {
     background-color: $base-color;
