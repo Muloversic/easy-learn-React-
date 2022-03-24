@@ -1,22 +1,23 @@
-$base-color: #191A35;
+$base-color: #191a35;
 $white: #fff;
+$burger-bg:rgb(164, 155, 252);
 
-.navigation{
-  display: flex;
-  justify-content: center;
+.navigation {
+    display: flex;
+    justify-content: center;
 
-    &__burger{
+    &__burger {
         display: none;
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 40px;
-        background-color: rgb(164, 155, 252);
-        &--active{
+        background-color: $burger-bg;
+        &--active {
             display: block;
         }
-        &-btn{
+        &-btn {
             position: fixed;
             z-index: 1;
             top: 2%;
@@ -27,7 +28,7 @@ $white: #fff;
             cursor: pointer;
         }
     }
-    &__list{
+    &__list {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -35,31 +36,29 @@ $white: #fff;
         width: 100%;
         padding: 0 35px;
         margin-top: 5px;
-        
     }
-    &__sublist{
+    &__sublist {
         display: flex;
         align-items: center;
-        li{
+        li {
             margin-right: 14px;
-            &:last-child{
+            &:last-child {
                 margin-right: 0;
             }
         }
     }
-    &__item{
+    &__item {
         color: $white;
         display: none;
-        &:last-child{
-            margin-left: auto; 
+        &:last-child {
+            margin-left: auto;
         }
-        &--active{
+        &--active {
             display: block;
             z-index: 1;
         }
-
     }
-    &__link{
+    &__link {
         color: inherit;
     }
 }

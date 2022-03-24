@@ -26,7 +26,7 @@ function App() {
       href: "/",
     },
     {
-      value:'',
+      value: "",
       href: "/",
       icon: "book",
     },
