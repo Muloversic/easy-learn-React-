@@ -44,12 +44,16 @@ export default function Header({ links, subLinks }) {
     navItems = document.querySelectorAll(".navigation__item");
   }, [burger]);
   
-  //button add new set is always on the display
+   //button add new set is always on the display
+  useEffect(() => {
     [...navItems].forEach((navItem, index) => {
       if (index === 2) {
         navItem.classList.add("navigation__item--active");
       }
     });
+  },[links]);
+ 
+    
   // open burger menu func
   function openMenu(event) {
     const burgerItem = document.querySelector(".navigation__burger");
