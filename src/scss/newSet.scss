@@ -1,0 +1,24 @@
+@import './variables.scss';
+.form{
+    display: flex;
+    flex-direction: column;
+    &__label{
+        color: $white;
+        margin: 0 0 10px 0;
+    }
+    &__input{
+        margin: 0 0 15px 0;
+        outline: none;
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid $white;
+    }
+    &__word{
+        display: flex;
+        background-color: $white;
+        &-input{
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}

@@ -1,10 +1,17 @@
 @import url(reset.scss);
-@import url(sets.scss);
 @import url(header.scss);
+@import url(sets.scss);
+@import url(newSet.scss);
+
 $base-color: #191a35;
 body {
     background-color: $base-color;
 }
 * {
     box-sizing: border-box;
+}
+
+.main{
+    margin-top: 40px;
+    padding: 0 10px;
 }
