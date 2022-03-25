@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
 import "./scss/index.scss";
 import Header from "./components/Header";
 import Settings from "./components/Settings";
@@ -54,7 +55,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Header links={links} subLinks={subLinks} />
+        <Header links={links} subLinks={subLinks}/>
         <Routes>
           <Route path="/" />
           <Route path="/settings" element={<Settings />} />

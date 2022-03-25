@@ -1,10 +1,11 @@
+import { nanoid } from "nanoid";
 import { React, useState, useEffect } from "react";
 export default function Header({ links, subLinks }) {
   const [burger, setBurger] = useState(false);
   const page = window.location.pathname.slice(1);
   const subItemLinks = subLinks.map((links) => {
     return (
-      <li className="navigation__item">
+      <li className="navigation__item" key={nanoid()}>
         <a href={links.href} className="navigation__link">
           <i className=" material-icons">{links.icon}</i>
         </a>
@@ -31,7 +32,7 @@ export default function Header({ links, subLinks }) {
     }
 
     return (
-      <li className="navigation__item">
+      <li className="navigation__item" key={nanoid()}>
         <a href={href} className="navigation__link">
           {title}
           <i className="material-icons">{icon}</i>

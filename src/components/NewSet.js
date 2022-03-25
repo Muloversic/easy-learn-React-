@@ -1,12 +1,16 @@
 import { React, useState, useEffect } from "react";
+import { nanoid } from "nanoid";
 import NewWord from "./NewWord";
 export default function NewSet(props) {
   const [NewWordElement, setNewWordElement] = useState();
   function addWord(event) {
     event.preventDefault();
+    setNewWordElement((prevElem) => [prevElem, <NewWord key={nanoid()}/>]);
+  }
+  function removeWord(event) {
+    event.prevenDefault();
     setNewWordElement((prevElem) => [prevElem, <NewWord />]);
   }
-
   return (
     <main className="main main-new_set new-set">
       <form className="new-set__form form">
