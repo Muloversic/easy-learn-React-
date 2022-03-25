@@ -1,24 +1,54 @@
-@import './variables.scss';
-.form{
+@import "./variables.scss";
+.form {
     display: flex;
     flex-direction: column;
-    &__label{
+    &__label {
         color: $white;
         margin: 0 0 10px 0;
+        &--new-word {
+            color: $black;
+        }
     }
-    &__input{
+    &__input {
         margin: 0 0 15px 0;
         outline: none;
         background-color: transparent;
         border: none;
         border-bottom: 1px solid $white;
+        &--new-word {
+            width: 100%;
+            border-bottom: 1px solid $black;
+            margin: 0;
+        }
     }
-    &__word{
+    &__word {
         display: flex;
         background-color: $white;
-        &-input{
+        padding: 7px;
+        &-data {
+            display: flex;
+          
+        }
+        &-input {
             display: flex;
             flex-direction: column;
+            &:first-child {
+                margin-right: 10px;
+            }
         }
+    }
+    &__buttons-lang{
+        display: flex;
+        .form__btn-lang:first-child{
+            margin-right: 10px;
+        }
+    }
+    &__btn-lang{
+        margin-top: 5px;
+        padding: 0;
+        font-size: 0.6em;
+        background-color:transparent;
+        border: none;
+        text-align: left;   
     }
 }
