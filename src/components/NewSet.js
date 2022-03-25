@@ -1,16 +1,11 @@
 import { React, useState, useEffect } from "react";
+import NewWord from "./NewWord";
 export default function NewSet(props) {
-  useEffect(() => {
-    const wordElemArr = document.querySelectorAll(".form__word");
-    console.log(wordElemArr);
-    [...wordElemArr].forEach((wordElement) => {
-      const buttonAdd =
-        '<button class="material-icons form__button-add">add_circle_outline</button>';
-      if (wordElement.nextElementSibling === null) {
-        wordElement.insertAdjacentHTML("afterend", buttonAdd);
-      }
-    });
-  });
+  const [NewWordElement, setNewWordElement] = useState();
+  function addWord(event) {
+    event.preventDefault();
+    setNewWordElement((prevElem) => [prevElem, <NewWord />]);
+  }
 
   return (
     <main className="main main-new_set new-set">
@@ -67,6 +62,10 @@ export default function NewSet(props) {
               </div>
             </div>
           </div>
+          {NewWordElement}
+          <button onClick={addWord} className="material-icons form__button-add">
+            add_circle_outline
+          </button>
         </div>
       </form>
     </main>
