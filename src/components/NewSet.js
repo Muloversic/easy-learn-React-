@@ -1,10 +1,19 @@
 import { React, useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 import NewWord from "./NewWord";
+import { getDatabase, ref, set } from "firebase/database";
+
 export default function NewSet(props) {
-  const [NewWordElement, setNewWordElement] = useState(
-    [<NewWord key={nanoid()} id={nanoid()} removeWord={removeWord} />]
-  );
+  // const db = getDatabase();
+  // set(ref(db, "users/" + nanoid()), {
+  //   username: "name",
+  //   email: "email",
+  //   profile_picture: "imageUrl",
+  // });
+
+  const [NewWordElement, setNewWordElement] = useState([
+    <NewWord key={nanoid()} id={nanoid()} removeWord={removeWord} />,
+  ]);
   function addWord(event) {
     event.preventDefault();
     setNewWordElement((prevState) => [
@@ -13,7 +22,9 @@ export default function NewSet(props) {
     ]);
   }
   function removeWord(event, id) {
-    setNewWordElement(prevState => prevState.filter(element => element.props.id !== id))
+    setNewWordElement((prevState) =>
+      prevState.filter((element) => element.props.id !== id)
+    );
   }
   return (
     <main className="main main-new_set new-set">

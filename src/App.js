@@ -5,7 +5,25 @@ import Header from "./components/Header";
 import Settings from "./components/Settings";
 import Sets from "./components/Sets";
 import NewSet from "./components/NewSet";
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
 function App() {
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyAyIMCboUIMW3D6RntFba1uzIoE6gkjoV4",
+    authDomain: "easy-learm.firebaseapp.com",
+    databaseURL: "https://easy-learm-default-rtdb.firebaseio.com",
+    projectId: "easy-learm",
+    storageBucket: "easy-learm.appspot.com",
+    messagingSenderId: "606003653726",
+    appId: "1:606003653726:web:c60c75b6676cb64c3098cf",
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
   const subLinks = [
     {
       href: "/sets",
@@ -40,12 +58,12 @@ function App() {
         },
         sets: {
           subValue: "Add new set +",
-          href:'/new-set'
+          href: "/new-set",
         },
         profile: {
           subValue: "profile",
         },
-        ['new-set']: {
+        ["new-set"]: {
           subValue: "Creating new set",
         },
       },
@@ -55,7 +73,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Header links={links} subLinks={subLinks}/>
+        <Header links={links} subLinks={subLinks} />
         <Routes>
           <Route path="/" />
           <Route path="/settings" element={<Settings />} />
