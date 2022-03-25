@@ -5,7 +5,7 @@ export default function NewSet(props) {
     console.log(wordElemArr);
     [...wordElemArr].forEach((wordElement) => {
       const buttonAdd =
-        '<button class="material-icons">add_circle_outline</button>';
+        '<button class="material-icons form__button-add">add_circle_outline</button>';
       if (wordElement.nextElementSibling === null) {
         wordElement.insertAdjacentHTML("afterend", buttonAdd);
       }
