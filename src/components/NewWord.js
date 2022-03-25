@@ -1,8 +1,12 @@
 export default function NewWord(props) {
   return (
-    <div className="form__word">
-      <button
-        onClick={props.removeWord}
+    <div className="form__word" id={props.id}>
+      <button 
+        id={props.id}
+        onClick={(event) => {
+            event.preventDefault()
+            return props.removeWord(event, props.id)
+        }}
         className="material-icons form__button-remove"
       >
         clear
