@@ -4,27 +4,45 @@ import NewWord from "./NewWord";
 import { getDatabase, ref, set } from "firebase/database";
 
 export default function NewSet(props) {
-  // const db = getDatabase();
-  // set(ref(db, "users/" + nanoid()), {
-  //   username: "name",
-  //   email: "email",
-  //   profile_picture: "imageUrl",
-  // });
-
   const [NewWordElement, setNewWordElement] = useState([
-    <NewWord key={nanoid()} id={nanoid()} removeWord={removeWord} />,
+    <NewWord key={nanoid()} id={nanoid()} removeWord={removeWord} getData={getData}/>,
   ]);
   function addWord(event) {
     event.preventDefault();
     setNewWordElement((prevState) => [
       ...prevState,
-      <NewWord key={nanoid()} id={nanoid()} removeWord={removeWord} />,
+      <NewWord key={nanoid()} id={nanoid()} removeWord={removeWord} getData={getData} />,
     ]);
   }
   function removeWord(event, id) {
     setNewWordElement((prevState) =>
       prevState.filter((element) => element.props.id !== id)
     );
+  }
+  function getData(inputValue,inputName ,id){
+    let word = ''
+    let translation = ''
+    if(inputName === 'Term'){
+      word = inputValue
+    }
+    if(inputName === 'Determination'){
+      translation = inputValue
+    }
+    // const data = {
+    //   word: [word],
+    //   translation: [translation],
+    // }
+    console.log(inputValue)
+  }
+  function createSet(setName, id, word, transl, extrTransl) {
+    const db = getDatabase();
+    set(ref(db, "sets/" + setName), {
+      [id] :{
+        word: [word],
+        translation: [transl],
+        extraTranslation: [extrTransl],
+      }
+    });
   }
   return (
     <main className="main main-new_set new-set">
@@ -53,6 +71,12 @@ export default function NewSet(props) {
           {NewWordElement}
           <button onClick={addWord} className="material-icons form__button-add">
             add_circle_outline
+          </button>
+          <button
+            onClick={createSet}
+            className="material-icons form__button-create"
+          >
+            Create new set
           </button>
         </div>
       </form>

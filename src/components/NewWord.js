@@ -1,4 +1,5 @@
 export default function NewWord(props) {
+    // divide getData on two fun : getWord and getTransl
   return (
     <div className="form__word">
       <button
@@ -17,6 +18,7 @@ export default function NewWord(props) {
             type="text"
             name="Term"
             className="form__input form__input--new-word"
+            onChange={(event)=> props.getData(event.target.value, event.target.name, props.id)}
           />
           <button className="form__btn-lang">Choose language</button>
         </div>
@@ -28,6 +30,7 @@ export default function NewWord(props) {
             type="text"
             name="Determination"
             className="form__input form__input--new-word"
+            onChange={(event)=> props.getData(event.target.value, event.target.name, props.id)}
           />
           <div className="form__buttons-lang">
             <button className="form__btn-lang">Add one more language</button>
