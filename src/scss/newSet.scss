@@ -30,6 +30,7 @@
     }
     &__word {
         display: flex;
+        position: relative;
         background-color: $white;
         padding: 7px;
         margin-top: 10px;
@@ -59,11 +60,23 @@
         border: none;
         text-align: left;   
     }
-    &__button-add{
-        background-color: transparent;
-        border: none;
-        color: $white;
-        margin-top: 10px;
-        width: 50px;
+    &__button{
+        &-add{
+            background-color: transparent;
+            border: none;
+            color: $white;
+            margin-top: 10px;
+            width: 50px;
+        }
+        &-remove{
+            background-color: transparent;
+            border: none;
+            color: $black;
+            width: 50px;
+            position: absolute;
+            top: 3%;
+            font-size: 1em;
+            right: -4%;
+        }
     }
 }

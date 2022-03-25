@@ -1,6 +1,7 @@
 export default function NewWord(props) {
   return (
     <div className="form__word">
+      <button className="material-icons form__button-remove">clear</button>
       <div className="form__word-data">
         <div className="form__word-input">
           <label className="form__label form__label--new-word">Term</label>
