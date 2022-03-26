@@ -4,14 +4,25 @@ import NewWord from "./NewWord";
 import { getDatabase, ref, set } from "firebase/database";
 
 export default function NewSet(props) {
-  const [NewWordElement, setNewWordElement] = useState([
-    <NewWord key={nanoid()} id={nanoid()} removeWord={removeWord} getData={getData}/>,
+  const [newWordElement, setNewWordElement] = useState([
+    <NewWord
+      key={nanoid()}
+      id={nanoid()}
+      removeWord={removeWord}
+      getData={getData}
+    />,
   ]);
+  const [inputData, setInputData] = useState([]);
   function addWord(event) {
     event.preventDefault();
     setNewWordElement((prevState) => [
       ...prevState,
-      <NewWord key={nanoid()} id={nanoid()} removeWord={removeWord} getData={getData} />,
+      <NewWord
+        key={nanoid()}
+        id={nanoid()}
+        removeWord={removeWord}
+        getData={getData}
+      />,
     ]);
   }
   function removeWord(event, id) {
@@ -19,29 +30,33 @@ export default function NewSet(props) {
       prevState.filter((element) => element.props.id !== id)
     );
   }
-  function getData(inputValue,inputName ,id){
-    let word = ''
-    let translation = ''
-    if(inputName === 'Term'){
-      word = inputValue
+  function getData(target, id) {
+    if (target.name === "Term") {
+      setInputData((prevData) => {
+        return {
+          ...prevData,
+          word: target.value,
+        };
+      });
     }
-    if(inputName === 'Determination'){
-      translation = inputValue
+    if (target.name === "Determination") {
+      setInputData((prevData) => {
+        return {
+          ...prevData,
+          translation: target.value,
+        };
+      });
     }
-    // const data = {
-    //   word: [word],
-    //   translation: [translation],
-    // }
-    console.log(inputValue)
   }
+  console.log(inputData);
   function createSet(setName, id, word, transl, extrTransl) {
     const db = getDatabase();
     set(ref(db, "sets/" + setName), {
-      [id] :{
+      [id]: {
         word: [word],
         translation: [transl],
         extraTranslation: [extrTransl],
-      }
+      },
     });
   }
   return (
@@ -68,7 +83,7 @@ export default function NewSet(props) {
           className="form__input"
         />
         <div className="form__words">
-          {NewWordElement}
+          {newWordElement}
           <button onClick={addWord} className="material-icons form__button-add">
             add_circle_outline
           </button>

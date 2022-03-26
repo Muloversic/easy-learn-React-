@@ -18,7 +18,7 @@ export default function NewWord(props) {
             type="text"
             name="Term"
             className="form__input form__input--new-word"
-            onChange={(event)=> props.getData(event.target.value, event.target.name, props.id)}
+            onChange={(event)=> props.getData(event.target, props.id)}
           />
           <button className="form__btn-lang">Choose language</button>
         </div>
@@ -30,7 +30,7 @@ export default function NewWord(props) {
             type="text"
             name="Determination"
             className="form__input form__input--new-word"
-            onChange={(event)=> props.getData(event.target.value, event.target.name, props.id)}
+            onChange={(event)=> props.getData(event.target, props.id)}
           />
           <div className="form__buttons-lang">
             <button className="form__btn-lang">Add one more language</button>
