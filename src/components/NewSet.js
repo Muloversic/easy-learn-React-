@@ -13,6 +13,8 @@ export default function NewSet(props) {
     />,
   ]);
   const [inputData, setInputData] = useState([]);
+  const [wordsData, setWordsData] = useState([]);
+
   function addWord(event) {
     event.preventDefault();
     setNewWordElement((prevState) => [
@@ -25,6 +27,16 @@ export default function NewSet(props) {
       />,
     ]);
   }
+  useEffect(() => {
+    setWordsData((prevData) => {
+      return {
+        ...prevData,
+        [nanoid()]: inputData,
+      };
+    });
+    // setWordsData(prevData => prevData.filter)
+  }, [inputData]);
+
   function removeWord(event, id) {
     setNewWordElement((prevState) =>
       prevState.filter((element) => element.props.id !== id)
@@ -36,6 +48,7 @@ export default function NewSet(props) {
         return {
           ...prevData,
           word: target.value,
+          id: id,
         };
       });
     }
@@ -44,20 +57,33 @@ export default function NewSet(props) {
         return {
           ...prevData,
           translation: target.value,
+          id: id,
         };
       });
     }
   }
-  console.log(inputData);
-  function createSet(setName, id, word, transl, extrTransl) {
-    const db = getDatabase();
-    set(ref(db, "sets/" + setName), {
-      [id]: {
-        word: [word],
-        translation: [transl],
-        extraTranslation: [extrTransl],
-      },
-    });
+
+  function createSet(event, setName, id, word, transl, extrTransl) {
+    event.preventDefault();
+    const allData = [];
+
+    for (let data in wordsData) {
+      allData.push(wordsData[data]);
+      const foo = wordsData[data];
+    }
+
+    let tmpArray = [];
+    function itemCheck(item) {
+      if (tmpArray.indexOf(item.id) === -1) {
+        tmpArray.push(item.id);
+        return true;
+      }
+      return false;
+    }
+
+    const dataReady = allData.reverse().filter((item) => itemCheck(item))
+    console.log(dataReady.reverse());
+    
   }
   return (
     <main className="main main-new_set new-set">
