@@ -1,6 +1,7 @@
 import { React, useState, useEffect } from "react";
 import { nanoid } from "nanoid";
 import NewWord from "./NewWord";
+import NewSetInfo from "./NewSetInfo";
 import { getDatabase, ref, set } from "firebase/database";
 
 export default function NewSet(props) {
@@ -34,7 +35,6 @@ export default function NewSet(props) {
         [nanoid()]: inputData,
       };
     });
-    // setWordsData(prevData => prevData.filter)
   }, [inputData]);
 
   function removeWord(event, id) {
@@ -43,6 +43,7 @@ export default function NewSet(props) {
     );
   }
   function getData(target, id) {
+    // console.log(target.value);
     if (target.name === "Term") {
       setInputData((prevData) => {
         return {
@@ -61,18 +62,33 @@ export default function NewSet(props) {
         };
       });
     }
+    if (target.name === "setName") {
+      setInputData((prevData) => {
+        return {
+          ...prevData,
+          setName: target.value,
+          id: id,
+        };
+      });
+    }
+    if (target.name === "setInfo") {
+      setInputData((prevData) => {
+        return {
+          ...prevData,
+          setInfo: target.value,
+          id: id,
+        };
+      });
+    }
   }
 
-  function createSet(event, setName, id, word, transl, extrTransl) {
-    event.preventDefault();
+  function filterWordsData() {
     const allData = [];
-
     for (let data in wordsData) {
       allData.push(wordsData[data]);
-      const foo = wordsData[data];
     }
 
-    let tmpArray = [];
+    const tmpArray = [];
     function itemCheck(item) {
       if (tmpArray.indexOf(item.id) === -1) {
         tmpArray.push(item.id);
@@ -81,33 +97,22 @@ export default function NewSet(props) {
       return false;
     }
 
-    const dataReady = allData.reverse().filter((item) => itemCheck(item))
-    console.log(dataReady.reverse());
-    
+    const data = allData.reverse().filter((item) => item.id !== undefined);
+    const dataReady = data.filter((item) => itemCheck(item));
+    return dataReady.reverse();
+  }
+
+  function createSet(event, setName) {
+    event.preventDefault();
+    const data = filterWordsData();
+    console.log(data);
+    const db = getDatabase();
+    set(ref(db, "words/" + setName), {});
   }
   return (
     <main className="main main-new_set new-set">
       <form className="new-set__form form">
-        <label htmlFor="setName" className="form__label">
-          Give a name to your set
-        </label>
-        <input
-          type="text"
-          placeholder="Name of set"
-          name="setName"
-          id="setName"
-          className="form__input"
-        />
-        <label htmlFor="setInfo" className="form__label">
-          Write any info about set
-        </label>
-        <input
-          type="text"
-          placeholder="Info"
-          name="setInfo"
-          id="setInfo"
-          className="form__input"
-        />
+        <NewSetInfo getData={getData} />
         <div className="form__words">
           {newWordElement}
           <button onClick={addWord} className="material-icons form__button-add">
