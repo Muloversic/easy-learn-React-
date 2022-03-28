@@ -4,7 +4,11 @@ export default function NewWord(props) {
   const [extraTransl, setExtraTransl] = useState();
   function addExtraTrasnl(event) {
     event.preventDefault();
-    setExtraTransl(<ExtraTranslation id={props.id} getData={props.getData} />);
+    setExtraTransl(<ExtraTranslation id={props.id} getData={props.getData} removeExtraTrasnl={removeExtraTrasnl}/>);
+  }
+  function removeExtraTrasnl(event) {
+    event.preventDefault();
+    setExtraTransl([]);
   }
   return (
     <div className="form__word">
