@@ -39,13 +39,15 @@
         margin-top: 10px;
         &-data {
             display: flex;
+            flex-wrap: wrap;
           
         }
         &-input {
             display: flex;
+            flex: 0 1 50%;
             flex-direction: column;
             &:first-child {
-                margin-right: 10px;
+                padding-right: 10px;
             }
         }
     }

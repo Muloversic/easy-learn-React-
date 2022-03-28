@@ -61,6 +61,15 @@ export default function NewSet(props) {
         };
       });
     }
+    if (target.name === "extraTranslation") {
+      setInputData((prevData) => {
+        return {
+          ...prevData,
+          extraTranslation: target.value,
+          id: id,
+        };
+      });
+    }
     if (target.name === "setName") {
       setInputData((prevData) => {
         return {
@@ -106,9 +115,9 @@ export default function NewSet(props) {
     const data = filterWordsData();
     console.log(data);
     const db = getDatabase();
-    set(ref(db, "sets/" + data[0].setName), {
-     data
-    });
+    // set(ref(db, "sets/" + data[0].setName), {
+    //  data
+    // });
   }
   return (
     <main className="main main-new_set new-set">
