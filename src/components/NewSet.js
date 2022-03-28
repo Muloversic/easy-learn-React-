@@ -121,7 +121,7 @@ export default function NewSet(props) {
           </button>
           <button
             onClick={createSet}
-            className="material-icons form__button-create"
+            className="form__button-create"
           >
             Create new set
           </button>

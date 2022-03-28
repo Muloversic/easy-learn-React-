@@ -78,5 +78,13 @@
             font-size: 1em;
             right: -4%;
         }
+        &-create{
+            background-color: transparent;
+            border: 1px solid $white;
+            color: $white;
+            text-align: center;
+            margin: 10px 0;
+            padding: 10px 25px;
+        }
     }
 }
