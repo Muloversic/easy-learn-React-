@@ -43,7 +43,6 @@ export default function NewSet(props) {
     );
   }
   function getData(target, id) {
-    // console.log(target.value);
     if (target.name === "Term") {
       setInputData((prevData) => {
         return {
@@ -102,12 +101,14 @@ export default function NewSet(props) {
     return dataReady.reverse();
   }
 
-  function createSet(event, setName) {
+  function createSet(event) {
     event.preventDefault();
     const data = filterWordsData();
     console.log(data);
     const db = getDatabase();
-    set(ref(db, "words/" + setName), {});
+    set(ref(db, "sets/" + data[0].setName), {
+     data
+    });
   }
   return (
     <main className="main main-new_set new-set">
