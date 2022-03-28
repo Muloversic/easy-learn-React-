@@ -1,4 +1,4 @@
-export default function ExtraTranslation({id, getData}) {
+export default function ExtraTranslation({ id, getData }) {
   return (
     <div className="form__word-secondary">
       <label className="form__label form__label--new-word">
@@ -10,7 +10,11 @@ export default function ExtraTranslation({id, getData}) {
         className="form__input form__input--new-word"
         onChange={(event) => getData(event.target, id)}
       />
-      <button className="form__btn-lang">Choose language</button>
+
+      <div className="form__buttons-lang form__buttons-lang--extra">
+        <button className="form__btn-lang">Choose language</button>
+        <button className="form__btn-lang ">Remove translations</button>
+      </div>
     </div>
   );
 }

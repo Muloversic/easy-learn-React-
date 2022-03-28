@@ -13,6 +13,7 @@ export default function NewSet(props) {
       getData={getData}
     />,
   ]);
+  
   const [inputData, setInputData] = useState([]);
   const [wordsData, setWordsData] = useState([]);
 
@@ -28,6 +29,7 @@ export default function NewSet(props) {
       />,
     ]);
   }
+
   useEffect(() => {
     setWordsData((prevData) => {
       return {
@@ -42,6 +44,7 @@ export default function NewSet(props) {
       prevState.filter((element) => element.props.id !== id)
     );
   }
+
   function getData(target, id) {
     if (target.name === "Term") {
       setInputData((prevData) => {
@@ -52,6 +55,7 @@ export default function NewSet(props) {
         };
       });
     }
+
     if (target.name === "Determination") {
       setInputData((prevData) => {
         return {
@@ -61,6 +65,7 @@ export default function NewSet(props) {
         };
       });
     }
+
     if (target.name === "extraTranslation") {
       setInputData((prevData) => {
         return {
@@ -70,6 +75,7 @@ export default function NewSet(props) {
         };
       });
     }
+
     if (target.name === "setName") {
       setInputData((prevData) => {
         return {
@@ -79,6 +85,7 @@ export default function NewSet(props) {
         };
       });
     }
+
     if (target.name === "setInfo") {
       setInputData((prevData) => {
         return {

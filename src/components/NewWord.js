@@ -1,5 +1,11 @@
+import { useState } from "react";
 import ExtraTranslation from "./ExtraTranslation";
 export default function NewWord(props) {
+  const [extraTransl, setExtraTransl] = useState();
+  function addExtraTrasnl(event) {
+    event.preventDefault();
+    setExtraTransl(<ExtraTranslation id={props.id} getData={props.getData} />);
+  }
   return (
     <div className="form__word">
       <button
@@ -33,11 +39,13 @@ export default function NewWord(props) {
             onChange={(event) => props.getData(event.target, props.id)}
           />
           <div className="form__buttons-lang">
-            <button className="form__btn-lang">Add one more language</button>
+            <button className="form__btn-lang" onClick={addExtraTrasnl}>
+              Add one more language
+            </button>
             <button className="form__btn-lang">Choose language</button>
           </div>
         </div>
-        <ExtraTranslation id={props.id} getData={props.getData}/>
+        {extraTransl}
       </div>
     </div>
   );
