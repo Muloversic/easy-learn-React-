@@ -21,7 +21,6 @@ function App() {
     messagingSenderId: "606003653726",
     appId: "1:606003653726:web:c60c75b6676cb64c3098cf",
   };
-
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const subLinks = [

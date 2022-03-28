@@ -56,6 +56,10 @@ $burger-bg:rgb(164, 155, 252);
         &--active {
             display: block;
             z-index: 1;
+
+            & .navigation__sublist .navigation__item{
+                display: block;
+            }
         }
     }
     &__link {

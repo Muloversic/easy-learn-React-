@@ -46,35 +46,32 @@ export default function Header({ links, subLinks }) {
     navItems = document.querySelectorAll(".navigation__item");
   }, [burger]);
 
-  //button add new set is always on the display
+  //logic for burger menu
   useEffect(() => {
+    const burgerItem = document.querySelector(".navigation__burger");
     [...navItems].forEach((navItem, index) => {
       if (index === 2) {
         navItem.classList.add("navigation__item--active");
       }
-    });
-  }, [links]);
 
-  // open burger menu func
-  function openMenu(event) {
-    const burgerItem = document.querySelector(".navigation__burger");
-    setBurger((prevState) => !prevState);
-    [...navItems].forEach((navItem, index) => {
       if (burger) {
         navItem.classList.remove("navigation__item--active");
+        burgerItem.classList.remove("navigation__burger--active");
         if (index === 2) {
           navItem.classList.add("navigation__item--active");
         }
-        burgerItem.classList.remove("navigation__burger--active");
       } else {
         navItem.classList.add("navigation__item--active");
-
+        burgerItem.classList.add("navigation__burger--active");
         if (index === 2) {
           navItem.classList.remove("navigation__item--active");
         }
-        burgerItem.classList.add("navigation__burger--active");
       }
     });
+  }, [burger]);
+
+  function openMenu() {
+    setBurger((prevState) => !prevState);
   }
 
   return (
