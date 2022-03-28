@@ -9,8 +9,8 @@ export default function NewSetInfo(props) {
         placeholder="Name of set"
         name="setName"
         id="setName"
-        className="form__input"
-        onChange={(event)=> props.getData(event.target)}
+        className="form__input form__input--info"
+        onChange={(event) => props.getData(event.target)}
       />
       <label htmlFor="setInfo" className="form__label">
         Write any info about set
@@ -20,8 +20,8 @@ export default function NewSetInfo(props) {
         placeholder="Info"
         name="setInfo"
         id="setInfo"
-        className="form__input"
-        onChange={(event)=> props.getData(event.target)}
+        className="form__input form__input--info"
+        onChange={(event) => props.getData(event.target)}
       />
     </>
   );
