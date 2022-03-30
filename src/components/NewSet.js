@@ -6,6 +6,7 @@ import { getDatabase, ref, set } from "firebase/database";
 
 export default function NewSet(props) {
   const [wordsData, setWordsData] = useState([]);
+  const [collectionInfo, setCollectionInfo] = useState([]);
   const [newWordElement, setNewWordElement] = useState([
     <NewWord
       key={nanoid()}
@@ -14,7 +15,7 @@ export default function NewSet(props) {
       setWordsData={setWordsData}
     />,
   ]);
- 
+
   function addWord(event) {
     event.preventDefault();
     setNewWordElement((prevState) => [
@@ -33,14 +34,13 @@ export default function NewSet(props) {
       prevState.filter((element) => element.props.id !== id)
     );
   }
-  
 
   function filterWordsData() {
     const allData = [];
     for (let data in wordsData) {
       allData.push(wordsData[data]);
     }
-
+    
     const tmpArray = [];
     function itemCheck(item) {
       if (tmpArray.indexOf(item.id) === -1) {
@@ -58,16 +58,19 @@ export default function NewSet(props) {
   function createSet(event) {
     event.preventDefault();
     const data = filterWordsData();
+    console.log(collectionInfo);
     console.log(data);
     const db = getDatabase();
-    // set(ref(db, "sets/" + data[0].setName), {
-    //  data
-    // });
+    set(ref(db, "sets/" + collectionInfo.setName), {
+      desription: collectionInfo.setInfo,
+      data,
+    });
   }
+
   return (
     <main className="main main-new_set new-set">
       <form className="new-set__form form">
-        <NewSetInfo setWordsData={setWordsData} />
+        <NewSetInfo setCollectionInfo={setCollectionInfo} />
         <div className="form__words">
           {newWordElement}
           <button onClick={addWord} className="material-icons form__button-add">

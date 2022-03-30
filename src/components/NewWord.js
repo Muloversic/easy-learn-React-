@@ -39,6 +39,7 @@ export default function NewWord(props) {
       };
     });
   }
+  
   function getData(target, id) {
     if (target.name === "Term") {
       setInputData((prevData) => {
@@ -100,7 +101,7 @@ export default function NewWord(props) {
       });
     }
   }
-  
+
   return (
     <div className="form__word">
       <button
