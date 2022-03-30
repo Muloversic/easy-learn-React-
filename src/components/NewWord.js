@@ -1,14 +1,98 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ExtraTranslation from "./ExtraTranslation";
+import { nanoid } from "nanoid";
 export default function NewWord(props) {
-  const [extraTransl, setExtraTransl] = useState();
+  const [extraTransl, setExtraTransl] = useState([]);
+  const [isRemoveExrtTranslation, setIsRemoveExtrTranslation] = useState(false);
+  const [inputData, setInputData] = useState([]);
+  useEffect(() => {
+    props.setWordsData((prevData) => {
+      return {
+        ...prevData,
+        [nanoid()]: inputData,
+      };
+    });
+  }, [inputData]);
+
   function addExtraTrasnl(event) {
     event.preventDefault();
-    setExtraTransl(<ExtraTranslation id={props.id} getData={props.getData} removeExtraTrasnl={removeExtraTrasnl}/>);
+    setIsRemoveExtrTranslation((prevState) => !prevState);
+    setExtraTransl(
+      <ExtraTranslation
+        id={props.id}
+        getData={getData}
+        removeExtraTrasnl={removeExtraTrasnl}
+        isRemoveExrtTranslation={isRemoveExrtTranslation}
+      />
+    );
   }
+
   function removeExtraTrasnl(event) {
     event.preventDefault();
-    setExtraTransl([]);
+  }
+  function getData(target, id, extra) {
+    // console.log(extra);
+    if (target.name === "Term") {
+      setInputData((prevData) => {
+        return {
+          ...prevData,
+          word: target.value,
+          id: id,
+        };
+      });
+    }
+  
+    if (target.name === "Determination") {
+      setInputData((prevData) => {
+        return {
+          ...prevData,
+          translation: target.value,
+          id: id,
+        };
+      });
+    }
+
+      if (target.name === "extraTranslation") {
+     
+      if(isRemoveExrtTranslation){
+        setInputData((prevData) => {
+          return {
+            ...prevData,
+            extraTranslation: '',
+            id: id,
+          };
+        });
+      } else {
+        setInputData((prevData) => {
+          return {
+            ...prevData,
+            extraTranslation: target.value,
+            id: id,
+          };
+        });
+      }
+    } 
+    
+
+    if (target.name === "setName") {
+      setInputData((prevData) => {
+        return {
+          ...prevData,
+          setName: target.value,
+          id: id,
+        };
+      });
+    }
+
+    if (target.name === "setInfo") {
+      setInputData((prevData) => {
+        return {
+          ...prevData,
+          setInfo: target.value,
+          id: id,
+        };
+      });
+    }
   }
   return (
     <div className="form__word">
@@ -28,7 +112,8 @@ export default function NewWord(props) {
             type="text"
             name="Term"
             className="form__input form__input--new-word"
-            onChange={(event) => props.getData(event.target, props.id)}
+          
+            onChange={(event) => getData(event.target, props.id)}
           />
           <button className="form__btn-lang">Choose language</button>
         </div>
@@ -40,11 +125,13 @@ export default function NewWord(props) {
             type="text"
             name="Determination"
             className="form__input form__input--new-word"
-            onChange={(event) => props.getData(event.target, props.id)}
+            
+            onChange={(event) => getData(event.target, props.id)}
           />
           <div className="form__buttons-lang">
             <button className="form__btn-lang" onClick={addExtraTrasnl}>
-              Add one more language
+              {props.isRemoveExrtTranslation ? "Remove" : "Add"} one more
+              language
             </button>
             <button className="form__btn-lang">Choose language</button>
           </div>

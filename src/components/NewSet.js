@@ -5,17 +5,22 @@ import NewSetInfo from "./NewSetInfo";
 import { getDatabase, ref, set } from "firebase/database";
 
 export default function NewSet(props) {
+  
+  const [wordsData, setWordsData] = useState([]);
   const [newWordElement, setNewWordElement] = useState([
     <NewWord
       key={nanoid()}
       id={nanoid()}
       removeWord={removeWord}
-      getData={getData}
+      setWordsData={setWordsData}
+      // setIsRemoveExtrTranslation={setIsRemoveExtrTranslation}
+      // isRemoveExrtTranslation={isRemoveExrtTranslation}
+
     />,
   ]);
   
-  const [inputData, setInputData] = useState([]);
-  const [wordsData, setWordsData] = useState([]);
+  // const [inputData, setInputData] = useState({});
+ 
 
   function addWord(event) {
     event.preventDefault();
@@ -25,77 +30,87 @@ export default function NewSet(props) {
         key={nanoid()}
         id={nanoid()}
         removeWord={removeWord}
-        getData={getData}
+        setWordsData={setWordsData}
+        // setIsRemoveExtrTranslation={setIsRemoveExtrTranslation}
+        // isRemoveExrtTranslation={isRemoveExrtTranslation}
+      
       />,
     ]);
   }
+  // console.log(isRemoveExrtTranslation)
 
-  useEffect(() => {
-    setWordsData((prevData) => {
-      return {
-        ...prevData,
-        [nanoid()]: inputData,
-      };
-    });
-  }, [inputData]);
+// console.log(wordsData)
 
   function removeWord(event, id) {
     setNewWordElement((prevState) =>
       prevState.filter((element) => element.props.id !== id)
     );
   }
+  
+  // function getData(target, id, extra) {
+  //   // console.log(extra);
+  //   if (target.name === "Term") {
+  //     setInputData((prevData) => {
+  //       return {
+  //         ...prevData,
+  //         word: target.value,
+  //         id: id,
+  //       };
+  //     });
+  //   }
+  
+  //   if (target.name === "Determination") {
+  //     setInputData((prevData) => {
+  //       return {
+  //         ...prevData,
+  //         translation: target.value,
+  //         id: id,
+  //       };
+  //     });
+  //   }
 
-  function getData(target, id) {
-    if (target.name === "Term") {
-      setInputData((prevData) => {
-        return {
-          ...prevData,
-          word: target.value,
-          id: id,
-        };
-      });
-    }
+  //   if (target.name === "extraTranslation") {
+     
+  //     if(isRemoveExrtTranslation){
+  //       setInputData((prevData) => {
+  //         return {
+  //           ...prevData,
+  //           extraTranslation: '',
+  //           id: id,
+  //         };
+  //       });
+  //     } else {
+  //       setInputData((prevData) => {
+  //         return {
+  //           ...prevData,
+  //           extraTranslation: target.value,
+  //           id: id,
+  //         };
+  //       });
+  //     }
+  //   } 
+    
 
-    if (target.name === "Determination") {
-      setInputData((prevData) => {
-        return {
-          ...prevData,
-          translation: target.value,
-          id: id,
-        };
-      });
-    }
+  //   if (target.name === "setName") {
+  //     setInputData((prevData) => {
+  //       return {
+  //         ...prevData,
+  //         setName: target.value,
+  //         id: id,
+  //       };
+  //     });
+  //   }
 
-    if (target.name === "extraTranslation") {
-      setInputData((prevData) => {
-        return {
-          ...prevData,
-          extraTranslation: target.value,
-          id: id,
-        };
-      });
-    }
-
-    if (target.name === "setName") {
-      setInputData((prevData) => {
-        return {
-          ...prevData,
-          setName: target.value,
-          id: id,
-        };
-      });
-    }
-
-    if (target.name === "setInfo") {
-      setInputData((prevData) => {
-        return {
-          ...prevData,
-          setInfo: target.value,
-          id: id,
-        };
-      });
-    }
-  }
+  //   if (target.name === "setInfo") {
+  //     setInputData((prevData) => {
+  //       return {
+  //         ...prevData,
+  //         setInfo: target.value,
+  //         id: id,
+  //       };
+  //     });
+  //   }
+  // }
 
   function filterWordsData() {
     const allData = [];
@@ -129,16 +144,13 @@ export default function NewSet(props) {
   return (
     <main className="main main-new_set new-set">
       <form className="new-set__form form">
-        <NewSetInfo getData={getData} />
+        <NewSetInfo setWordsData={setWordsData} />
         <div className="form__words">
           {newWordElement}
           <button onClick={addWord} className="material-icons form__button-add">
             add_circle_outline
           </button>
-          <button
-            onClick={createSet}
-            className="form__button-create"
-          >
+          <button onClick={createSet} className="form__button-create">
             Create new set
           </button>
         </div>
