@@ -30,8 +30,7 @@ export default function NewWord(props) {
   function removeExtraTrasnl(event) {
     event.preventDefault();
   }
-  function getData(target, id, extra) {
-    // console.log(extra);
+  function getData(target, id) {
     if (target.name === "Term") {
       setInputData((prevData) => {
         return {
@@ -130,7 +129,7 @@ export default function NewWord(props) {
           />
           <div className="form__buttons-lang">
             <button className="form__btn-lang" onClick={addExtraTrasnl}>
-              {props.isRemoveExrtTranslation ? "Remove" : "Add"} one more
+              {isRemoveExrtTranslation ? "Remove" : "Add"} one more
               language
             </button>
             <button className="form__btn-lang">Choose language</button>

@@ -5,7 +5,6 @@ import NewSetInfo from "./NewSetInfo";
 import { getDatabase, ref, set } from "firebase/database";
 
 export default function NewSet(props) {
-  
   const [wordsData, setWordsData] = useState([]);
   const [newWordElement, setNewWordElement] = useState([
     <NewWord
@@ -13,15 +12,9 @@ export default function NewSet(props) {
       id={nanoid()}
       removeWord={removeWord}
       setWordsData={setWordsData}
-      // setIsRemoveExtrTranslation={setIsRemoveExtrTranslation}
-      // isRemoveExrtTranslation={isRemoveExrtTranslation}
-
     />,
   ]);
-  
-  // const [inputData, setInputData] = useState({});
  
-
   function addWord(event) {
     event.preventDefault();
     setNewWordElement((prevState) => [
@@ -31,15 +24,9 @@ export default function NewSet(props) {
         id={nanoid()}
         removeWord={removeWord}
         setWordsData={setWordsData}
-        // setIsRemoveExtrTranslation={setIsRemoveExtrTranslation}
-        // isRemoveExrtTranslation={isRemoveExrtTranslation}
-      
       />,
     ]);
   }
-  // console.log(isRemoveExrtTranslation)
-
-// console.log(wordsData)
 
   function removeWord(event, id) {
     setNewWordElement((prevState) =>
@@ -47,70 +34,6 @@ export default function NewSet(props) {
     );
   }
   
-  // function getData(target, id, extra) {
-  //   // console.log(extra);
-  //   if (target.name === "Term") {
-  //     setInputData((prevData) => {
-  //       return {
-  //         ...prevData,
-  //         word: target.value,
-  //         id: id,
-  //       };
-  //     });
-  //   }
-  
-  //   if (target.name === "Determination") {
-  //     setInputData((prevData) => {
-  //       return {
-  //         ...prevData,
-  //         translation: target.value,
-  //         id: id,
-  //       };
-  //     });
-  //   }
-
-  //   if (target.name === "extraTranslation") {
-     
-  //     if(isRemoveExrtTranslation){
-  //       setInputData((prevData) => {
-  //         return {
-  //           ...prevData,
-  //           extraTranslation: '',
-  //           id: id,
-  //         };
-  //       });
-  //     } else {
-  //       setInputData((prevData) => {
-  //         return {
-  //           ...prevData,
-  //           extraTranslation: target.value,
-  //           id: id,
-  //         };
-  //       });
-  //     }
-  //   } 
-    
-
-  //   if (target.name === "setName") {
-  //     setInputData((prevData) => {
-  //       return {
-  //         ...prevData,
-  //         setName: target.value,
-  //         id: id,
-  //       };
-  //     });
-  //   }
-
-  //   if (target.name === "setInfo") {
-  //     setInputData((prevData) => {
-  //       return {
-  //         ...prevData,
-  //         setInfo: target.value,
-  //         id: id,
-  //       };
-  //     });
-  //   }
-  // }
 
   function filterWordsData() {
     const allData = [];
