@@ -16,7 +16,7 @@ export default function NewWord(props) {
 
   function addExtraTrasnl(event) {
     event.preventDefault();
-    setIsRemoveExtrTranslation((prevState) => !prevState);
+    setIsRemoveExtrTranslation(true);
     setExtraTransl(
       <ExtraTranslation
         id={props.id}
@@ -27,8 +27,17 @@ export default function NewWord(props) {
     );
   }
 
-  function removeExtraTrasnl(event) {
+  function removeExtraTrasnl(event, id) {
     event.preventDefault();
+    setIsRemoveExtrTranslation(false);
+    setExtraTransl([]);
+    setInputData((prevData) => {
+      return {
+        ...prevData,
+        extraTranslation: "",
+        id: id,
+      };
+    });
   }
   function getData(target, id) {
     if (target.name === "Term") {
@@ -40,7 +49,7 @@ export default function NewWord(props) {
         };
       });
     }
-  
+
     if (target.name === "Determination") {
       setInputData((prevData) => {
         return {
@@ -51,13 +60,12 @@ export default function NewWord(props) {
       });
     }
 
-      if (target.name === "extraTranslation") {
-     
-      if(isRemoveExrtTranslation){
+    if (target.name === "extraTranslation") {
+      if (isRemoveExrtTranslation) {
         setInputData((prevData) => {
           return {
             ...prevData,
-            extraTranslation: '',
+            extraTranslation: "",
             id: id,
           };
         });
@@ -70,8 +78,7 @@ export default function NewWord(props) {
           };
         });
       }
-    } 
-    
+    }
 
     if (target.name === "setName") {
       setInputData((prevData) => {
@@ -93,6 +100,7 @@ export default function NewWord(props) {
       });
     }
   }
+  
   return (
     <div className="form__word">
       <button
@@ -111,7 +119,6 @@ export default function NewWord(props) {
             type="text"
             name="Term"
             className="form__input form__input--new-word"
-          
             onChange={(event) => getData(event.target, props.id)}
           />
           <button className="form__btn-lang">Choose language</button>
@@ -124,13 +131,11 @@ export default function NewWord(props) {
             type="text"
             name="Determination"
             className="form__input form__input--new-word"
-            
             onChange={(event) => getData(event.target, props.id)}
           />
           <div className="form__buttons-lang">
             <button className="form__btn-lang" onClick={addExtraTrasnl}>
-              {isRemoveExrtTranslation ? "Remove" : "Add"} one more
-              language
+              Add one more language
             </button>
             <button className="form__btn-lang">Choose language</button>
           </div>

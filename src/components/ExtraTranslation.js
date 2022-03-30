@@ -1,4 +1,4 @@
-export default function ExtraTranslation({ id, getData, isRemoveExrtTranslation }) { 
+export default function ExtraTranslation({ id, getData, removeExtraTrasnl }) { 
   // console.log(isRemoveExrtTranslation)
   return (
     <div className="form__word-secondary">
@@ -14,13 +14,12 @@ export default function ExtraTranslation({ id, getData, isRemoveExrtTranslation 
 
       <div className="form__buttons-lang form__buttons-lang--extra">
         <button className="form__btn-lang">Choose language</button>
-        {/* <button
+        <button
           className="form__btn-lang"
-          onClick={(event) => removeExtraTrasnl(event)}
-          // onClick={(event) => removeExtraTrasnl(event)}
+          onClick={(event) => removeExtraTrasnl(event, id)}
         >
           Remove translations
-        </button> */}
+        </button>
       </div>
     </div>
   );
