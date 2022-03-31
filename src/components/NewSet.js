@@ -62,7 +62,7 @@ export default function NewSet(props) {
     console.log(data);
     const db = getDatabase();
     set(ref(db, "sets/" + collectionInfo.setName), {
-      desription: collectionInfo.setInfo,
+      description: collectionInfo.setInfo,
       setName: collectionInfo.setName,
       data,
     });

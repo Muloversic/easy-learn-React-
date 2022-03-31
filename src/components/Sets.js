@@ -1,10 +1,12 @@
 import { getDatabase, ref, onValue } from "firebase/database";
 import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
-export default function Sets() {
+import { Link } from "react-router-dom";
+export default function Sets({ setCollectionData }) {
   const db = getDatabase();
   const sets = ref(db, "sets/");
   const [data, setData] = useState();
+
   useEffect(() => {
     onValue(sets, (snapshot) => {
       const data = snapshot.val();
@@ -25,10 +27,18 @@ export default function Sets() {
     }
 
     var setElement = dataArray.map((set) => {
-      console.log(set);
       return (
         <div className="sets__item" key={nanoid()}>
+          <Link
+            to={{
+              pathname: "/open-set",
+              propsSet: set,
+            }}
+          >
+            Ссылка
+          </Link>
           <h2 className="sets__item-info">{set.setName}</h2>
+          <p className="sets__item-info">{set.description}</p>
           <span className="sets__item-info">Phreases {set.data.length}</span>
           <span className="sets__item-info">hard coded pr</span>
         </div>
@@ -36,5 +46,12 @@ export default function Sets() {
     });
   }
 
-  return <main className="sets">{setElement}</main>;
+  function editSet(event, set) {
+    setCollectionData(set);
+  }
+  return (
+    <>
+      <main className="sets">{setElement}</main>
+    </>
+  );
 }

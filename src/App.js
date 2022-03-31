@@ -5,8 +5,10 @@ import Header from "./components/Header";
 import Settings from "./components/Settings";
 import Sets from "./components/Sets";
 import NewSet from "./components/NewSet";
+import OpenSet from "./components/OpenSet";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { useEffect, useState } from "react";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -23,6 +25,10 @@ function App() {
   };
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
+  const [collectionData, setCollectionData] = useState(1);
+  // const [openSetPage, setOpenSetPage] = useState();
+  // console.log(collectionData);
+
   const subLinks = [
     {
       href: "/sets",
@@ -65,10 +71,13 @@ function App() {
         ["new-set"]: {
           subValue: "Creating new set",
         },
+        ["open-set"]: {
+          subValue: "Editing",
+        },
       },
     },
   ];
-  
+
   return (
     <div className="App">
       <Router>
@@ -76,8 +85,14 @@ function App() {
         <Routes>
           <Route path="/" />
           <Route path="/settings" element={<Settings />} />
-          <Route path="/sets" element={<Sets />} />
+          <Route
+            path="/sets"
+            element={<Sets setCollectionData={setCollectionData} />}
+          />
           <Route path="/new-set" element={<NewSet />} />
+          <Route path="/open-set" element={<OpenSet />} />
+          
+          
         </Routes>
       </Router>
     </div>
