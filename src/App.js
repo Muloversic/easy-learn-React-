@@ -27,6 +27,7 @@ function App() {
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const [collectionData, setCollectionData] = useState();
+  const [wordsToLearn, setWordsToLearn] = useState();
   const subLinks = [
     {
       href: "/sets",
@@ -93,11 +94,11 @@ function App() {
           <Route path="/new-set" element={<NewSet />} />
           <Route
             path="/open-set"
-            element={<OpenSet collectionData={collectionData} />}
+            element={<OpenSet collectionData={collectionData} setWordsToLearn={setWordsToLearn}/>}
           />
           <Route
             path="/learning"
-            element={<StudySet  />}
+            element={<StudySet  wordsToLearn={wordsToLearn}/>}
           />
         </Routes>
       </Router>

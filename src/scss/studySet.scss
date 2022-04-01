@@ -1,0 +1,21 @@
+@import "./variables.scss";
+.study{
+    &__words{
+        display: flex;
+        flex-direction: column;
+    }
+    &__word{
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+    }
+    &__label{
+        color: $white;
+        margin-bottom: 10px;
+    }
+    &__input{
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid $white;
+    }
+}
