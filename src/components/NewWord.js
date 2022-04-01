@@ -47,6 +47,7 @@ export default function NewWord(props) {
           ...prevData,
           word: target.value,
           id: id,
+          progress: 0
         };
       });
     }

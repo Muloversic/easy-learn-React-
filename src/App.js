@@ -6,6 +6,7 @@ import Settings from "./components/Settings";
 import Sets from "./components/Sets";
 import NewSet from "./components/NewSet";
 import OpenSet from "./components/OpenSet";
+import StudySet from "./components/StudySet";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { useEffect, useState } from "react";
@@ -71,6 +72,9 @@ function App() {
         ["open-set"]: {
           subValue: "Set info",
         },
+        learning: {
+          subValue: "learning",
+        },
       },
     },
   ];
@@ -90,6 +94,10 @@ function App() {
           <Route
             path="/open-set"
             element={<OpenSet collectionData={collectionData} />}
+          />
+          <Route
+            path="/learning"
+            element={<StudySet  />}
           />
         </Routes>
       </Router>
