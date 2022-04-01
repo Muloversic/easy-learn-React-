@@ -28,12 +28,10 @@ export default function Sets({ setCollectionData }) {
 
     var setElement = dataArray.map((set) => {
       return (
-        <div className="sets__item" key={nanoid()}>
+        <div className="sets__item" key={nanoid()} >
           <Link
-            to={{
-              pathname: "/open-set",
-              propsSet: set,
-            }}
+          onClick={(event) => editSet(event, set)}
+            to='/open-set'
           >
             Ссылка
           </Link>
