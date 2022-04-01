@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
-import NewWord from "./NewWord";
 export default function OpenSet({ collectionData }) {
-  console.log(collectionData);
   const wordsElements = collectionData.data.map((word) => {
       return(
           <div className="info__word" key={nanoid()}>
@@ -21,11 +19,13 @@ export default function OpenSet({ collectionData }) {
           </div>
       )
   });
+
   return (
     <main className="info">
       <div className="info__set-info">
         <h2 className="info__set-title">{collectionData.setName}</h2>
         <p className="info__set-description">{collectionData.description}</p>
+        <button className="info__set-button">Study words</button>
         <div className="info__words">{wordsElements}</div>
       </div>
     </main>
