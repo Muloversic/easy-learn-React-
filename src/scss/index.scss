@@ -2,6 +2,7 @@
 @import url(header.scss);
 @import url(sets.scss);
 @import url(newSet.scss);
+@import url(openSet.scss);
 
 
 $base-color: #191a35;
@@ -12,7 +13,7 @@ body {
     box-sizing: border-box;
 }
 
-.main{
+main{
     margin-top: 40px;
     padding: 0 10px;
 }

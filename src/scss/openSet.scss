@@ -1,0 +1,52 @@
+@import "./variables.scss";
+.info {
+    &__set {
+        &-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        &-title {
+            color: $white;
+            text-transform: capitalize;
+            padding: 10px 0 5px 0;
+            border-bottom: 1px solid $white;
+        }
+
+        &-description {
+            color: $white;
+            padding: 10px 0 5px 0;
+            border-bottom: 1px solid $white;
+        }
+    }
+
+    &__words {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__word {
+        display: flex;
+        background-color: $white;
+        padding: 7px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+        &-block {
+            flex: 0 1 50%;
+            &:first-child {
+                padding-right: 10px;
+            }
+        }
+
+        &-input {
+            margin: 15px 0 0 0;
+            padding-bottom: 5px;
+            border-bottom: 1px solid $black;
+        }
+
+        &-secondary {
+            margin-top: 10px;
+            flex: 0 1 100%;
+        }
+    }
+}

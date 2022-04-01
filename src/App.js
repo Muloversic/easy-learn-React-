@@ -69,7 +69,7 @@ function App() {
           subValue: "Creating new set",
         },
         ["open-set"]: {
-          subValue: "Editing",
+          subValue: "Set info",
         },
       },
     },
