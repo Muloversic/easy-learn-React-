@@ -1,21 +1,25 @@
 @import "./variables.scss";
 .study{
-    &__words{
-        display: flex;
-        flex-direction: column;
-    }
-    &__word{
-        display: flex;
-        flex-direction: column;
-        margin-top: 10px;
-    }
-    &__label{
-        color: $white;
-        margin-bottom: 10px;
-    }
-    &__input{
-        background-color: transparent;
-        border: none;
-        border-bottom: 1px solid $white;
-    }
+   margin-top: 50px;
+   display: flex;
+   flex-direction: column;
+   &__elements{
+       display: flex;
+       flex-direction: column;
+   }
+   &__word{
+       display: flex;
+       flex-direction: column;
+       margin-top: 10px;
+       &:first-child{
+           margin-top: 0;
+       }
+       &-label{
+           color: $white;
+           margin-bottom: 5px;
+       }
+   }
+   &__button{
+       margin-top: 10px;
+   }
 }
