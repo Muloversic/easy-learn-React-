@@ -58,11 +58,35 @@ export default function StudySet({ wordsToLearn }) {
     );
   });
 
-
-
   function checkAnswers(event) {
     event.preventDefault();
-    console.log(filterWordsData());
+    const userAnswers = filterWordsData();
+    const rightAnswers = [];
+    const wrongAnswers = [];
+    userAnswers.forEach((userWord) => {
+      rightAnswers.push(
+        ...wordsToLearn.data.filter(
+          (word) =>
+            word.translation === userWord.translation &&
+            userWord.translation &&
+            word.id === userWord.id
+        )
+      );
+
+      wrongAnswers.push(
+        ...wordsToLearn.data.filter(
+          (word) =>
+            word.translation !== userWord.translation && word.id === userWord.id
+        )
+      );
+    });
+
+    updateResult(rightAnswers, wrongAnswers)
+  }
+
+  function updateResult(rightAnswers, wrongAnswers){
+    console.log(rightAnswers);
+    console.log(wrongAnswers);
   }
 
   return (
