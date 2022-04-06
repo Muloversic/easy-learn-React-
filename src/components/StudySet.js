@@ -3,15 +3,28 @@ import { nanoid } from "nanoid";
 export default function StudySet({ wordsToLearn }) {
   const [inputData, setInputData] = useState([]);
   const [wordsData, setWordsData] = useState([]);
-  function getData(target, id) {
+  function getData(target, id, isExtraTranslation) {
     if (target.name === "Determination") {
       setInputData((prevData) => {
         return {
           ...prevData,
           translation: target.value,
+          extraTranslation: "",
           id: id,
         };
       });
+    }
+
+    if (isExtraTranslation) {
+      if (target.name === "extraTranslation") {
+        setInputData((prevData) => {
+          return {
+            ...prevData,
+            extraTranslation: target.value,
+            id: id,
+          };
+        });
+      }
     }
   }
 
@@ -45,6 +58,7 @@ export default function StudySet({ wordsToLearn }) {
   }
 
   const wordsElements = wordsToLearn.data.map((word) => {
+    let isExtraTranslation = false;
     return (
       <div className="study__word">
         <label className="study__word-label">{word.word}</label>
@@ -52,8 +66,23 @@ export default function StudySet({ wordsToLearn }) {
           type="text"
           name="Determination"
           className="study__word-input"
-          onChange={(event) => getData(event.target, word.id)}
+          onChange={(event) =>
+            getData(event.target, word.id, isExtraTranslation)
+          }
         />
+        {word.extraTranslation && (
+          <>
+            {/* <label className="study__word-label">{word.extraTranslation}</label> */}
+            <input
+              type="text"
+              name="extraTranslation"
+              className="study__word-input"
+              onChange={(event) =>
+                getData(event.target, word.id, (isExtraTranslation = true))
+              }
+            />
+          </>
+        )}
       </div>
     );
   });
@@ -61,32 +90,74 @@ export default function StudySet({ wordsToLearn }) {
   function checkAnswers(event) {
     event.preventDefault();
     const userAnswers = filterWordsData();
+    
     const rightAnswers = [];
     const wrongAnswers = [];
     userAnswers.forEach((userWord) => {
-      rightAnswers.push(
-        ...wordsToLearn.data.filter(
-          (word) =>
-            word.translation === userWord.translation &&
-            userWord.translation &&
-            word.id === userWord.id
-        )
-      );
-
-      wrongAnswers.push(
-        ...wordsToLearn.data.filter(
-          (word) =>
-            word.translation !== userWord.translation && word.id === userWord.id
-        )
-      );
+      if(userWord.extraTranslation){
+        // console.log(userWord)
+        rightAnswers.push(
+          ...wordsToLearn.data.filter(
+            (word) =>
+              (word.extraTranslation === userWord.extraTranslation &&
+              word.translation === userWord.translation) &&
+              word.id === userWord.id
+          )
+        );
+  
+        wrongAnswers.push(
+          ...wordsToLearn.data.filter(
+            (word) =>
+              (word.extraTranslation !== userWord.extraTranslation &&
+              word.translation !== userWord.translation) &&
+              word.id === userWord.id
+          )
+        );
+      } else {
+        rightAnswers.push(
+          ...wordsToLearn.data.filter(
+            (word) =>
+            
+              word.translation === userWord.translation &&
+              word.id === userWord.id
+          )
+        );
+  
+        wrongAnswers.push(
+          ...wordsToLearn.data.filter(
+            (word) =>
+            
+              word.translation !== userWord.translation &&
+              word.id === userWord.id
+          )
+        );
+      }
+    
     });
 
-    updateResult(rightAnswers, wrongAnswers)
+    updateResult(rightAnswers, wrongAnswers);
   }
 
-  function updateResult(rightAnswers, wrongAnswers){
-    console.log(rightAnswers);
-    console.log(wrongAnswers);
+  function updateResult(rightAnswers, wrongAnswers) {
+    wordsToLearn.data.forEach((word) => {
+      rightAnswers.forEach((rightWord) => {
+        if (word.id === rightWord.id) {
+          word.progress += 10;
+          word.rightAnswers += 1;
+        }
+      });
+
+      wrongAnswers.forEach((wrongWord) => {
+        if (word.id === wrongWord.id && word.progress > 0) {
+          word.progress -= 10;
+          word.rightAnswers -= 1;
+        }
+      });
+    });
+
+    console.log(wordsToLearn.data);
+      // console.log(rightAnswers);
+      // console.log(wrongAnswers);
   }
 
   return (
