@@ -3,6 +3,7 @@ import { nanoid } from "nanoid";
 export default function StudySet({ wordsToLearn }) {
   const [inputData, setInputData] = useState([]);
   const [wordsData, setWordsData] = useState([]);
+  const [rightAnswersToDisplay, setRightAnswersToDisplay] = useState();
   function getData(target, id, isExtraTranslation) {
     if (target.name === "Determination") {
       setInputData((prevData) => {
@@ -63,6 +64,7 @@ export default function StudySet({ wordsToLearn }) {
       <div className="study__word">
         <label className="study__word-label">{word.word}</label>
         <input
+          id={word.id}
           type="text"
           name="Determination"
           className="study__word-input"
@@ -72,8 +74,9 @@ export default function StudySet({ wordsToLearn }) {
         />
         {word.extraTranslation && (
           <>
-            {/* <label className="study__word-label">{word.extraTranslation}</label> */}
+            <label className="study__word-label">Second translation</label>
             <input
+              id={word.id + "-extr"}
               type="text"
               name="extraTranslation"
               className="study__word-input"
@@ -90,26 +93,24 @@ export default function StudySet({ wordsToLearn }) {
   function checkAnswers(event) {
     event.preventDefault();
     const userAnswers = filterWordsData();
-    
     const rightAnswers = [];
     const wrongAnswers = [];
     userAnswers.forEach((userWord) => {
-      if(userWord.extraTranslation){
-        // console.log(userWord)
+      if (userWord.extraTranslation) {
         rightAnswers.push(
           ...wordsToLearn.data.filter(
             (word) =>
-              (word.extraTranslation === userWord.extraTranslation &&
-              word.translation === userWord.translation) &&
+              word.extraTranslation === userWord.extraTranslation &&
+              word.translation === userWord.translation &&
               word.id === userWord.id
           )
         );
-  
+
         wrongAnswers.push(
           ...wordsToLearn.data.filter(
             (word) =>
-              (word.extraTranslation !== userWord.extraTranslation &&
-              word.translation !== userWord.translation) &&
+              word.extraTranslation !== userWord.extraTranslation &&
+              // word.translation !== userWord.translation &&
               word.id === userWord.id
           )
         );
@@ -117,25 +118,60 @@ export default function StudySet({ wordsToLearn }) {
         rightAnswers.push(
           ...wordsToLearn.data.filter(
             (word) =>
-            
               word.translation === userWord.translation &&
               word.id === userWord.id
           )
         );
-  
+
         wrongAnswers.push(
           ...wordsToLearn.data.filter(
             (word) =>
-            
               word.translation !== userWord.translation &&
               word.id === userWord.id
           )
         );
       }
-    
+    });
+    updateResult(rightAnswers, wrongAnswers);
+    displayResult(rightAnswers, wrongAnswers);
+  }
+
+  function displayResult(rightAnswers, wrongAnswers) {
+    wrongAnswers.forEach((answer) => {
+      const wrongInput = document.querySelector(`#${answer.id}`);
+      const wrongInputExtr = document.querySelector(`#${answer.id}-extr`);
+      colorizeInputs(wrongInput, wrongInputExtr, "red");
     });
 
-    updateResult(rightAnswers, wrongAnswers);
+    rightAnswers.forEach((answer) => {
+      const rightInput = document.querySelector(`#${answer.id}`);
+      const rightInputExtr = document.querySelector(`#${answer.id}-extr`);
+      colorizeInputs(rightInput, rightInputExtr, "green");
+    });
+
+    function colorizeInputs(rightInput, rightInputExtr, color) {
+      rightInput.style.borderColor = color;
+      if (rightInputExtr) {
+        rightInputExtr.style.borderColor = color;
+      }
+    }
+
+    const rightAnswerElement = wrongAnswers.map((answer) => {
+      let hint = ''
+      if(answer.extraTranslation){
+        hint = `extra translation ${answer.extraTranslation} translation ${answer.word}`
+      } else {
+        hint = `translation ${answer.word}`
+      }
+
+      return (
+        <p className="study__result">
+          Right answer for <span className="study__word-studying">{answer.word}</span>: {hint}
+        </p>
+      );
+    });
+
+    setRightAnswersToDisplay(rightAnswerElement);
   }
 
   function updateResult(rightAnswers, wrongAnswers) {
@@ -155,15 +191,16 @@ export default function StudySet({ wordsToLearn }) {
       });
     });
 
-    console.log(wordsToLearn.data);
-      // console.log(rightAnswers);
-      // console.log(wrongAnswers);
+    // console.log(wordsToLearn.data);
   }
 
   return (
     <main>
       <form className="study" onSubmit={checkAnswers}>
-        <div className="study__elements">{wordsElements}</div>
+        <div className="study__elements">
+          {wordsElements}
+          {rightAnswersToDisplay}
+        </div>
         <button className="study__button">Submit answers</button>
       </form>
     </main>
