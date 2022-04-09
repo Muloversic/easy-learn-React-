@@ -137,7 +137,9 @@ export default function StudySet({ wordsToLearn }) {
     [...inputs].forEach((input) => {
       if (input.value === "") {
         wrongAnswers.push(
-          ...wordsToLearn.data.filter((word) => word.id === input.id)
+          ...wordsToLearn.data.filter(
+            (word) => word.id === input.id || `${word.id}-extr` === input.id
+          )
         );
       }
     });
@@ -148,22 +150,22 @@ export default function StudySet({ wordsToLearn }) {
   }
 
   function displayResult(rightAnswers, wrongAnswers) {
-    wrongAnswers.forEach((answer) => {
-      const wrongInput = document.querySelector(`#${answer.id}`);
-      const wrongInputExtr = document.querySelector(`#${answer.id}-extr`);
-      colorizeInputs(wrongInput, wrongInputExtr, "red");
-    });
-
     rightAnswers.forEach((answer) => {
       const rightInput = document.querySelector(`#${answer.id}`);
       const rightInputExtr = document.querySelector(`#${answer.id}-extr`);
       colorizeInputs(rightInput, rightInputExtr, "green");
     });
 
-    function colorizeInputs(rightInput, rightInputExtr, color) {
-      rightInput.style.borderColor = color;
-      if (rightInputExtr) {
-        rightInputExtr.style.borderColor = color;
+    wrongAnswers.forEach((answer) => {
+      const wrongInput = document.querySelector(`#${answer.id}`);
+      const wrongInputExtr = document.querySelector(`#${answer.id}-extr`);
+      colorizeInputs(wrongInput, wrongInputExtr, "red");
+    });
+
+    function colorizeInputs(input, inputExtr, color) {
+      input.style.borderColor = color;
+      if (inputExtr) {
+        inputExtr.style.borderColor = color;
       }
     }
 
