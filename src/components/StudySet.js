@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { nanoid } from "nanoid";
 export default function StudySet({ wordsToLearn }) {
   const [inputData, setInputData] = useState([]);
@@ -144,7 +145,8 @@ export default function StudySet({ wordsToLearn }) {
       }
     });
 
-  
+    const buttonSubmit = document.querySelector(".study__button");
+    buttonSubmit.setAttribute("disabled", true);
 
     wrongAnswers = Array.from(new Set(wrongAnswers));
     updateResult(rightAnswers, wrongAnswers);
@@ -220,6 +222,7 @@ export default function StudySet({ wordsToLearn }) {
           {rightAnswersToDisplay}
         </div>
         <button className="study__button">Submit answers</button>
+        <Link to="/open-set" className="study__link">Go back to set</Link>
       </form>
     </main>
   );
