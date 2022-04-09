@@ -171,16 +171,20 @@ export default function StudySet({ wordsToLearn }) {
 
     const rightAnswerElement = wrongAnswers.map((answer) => {
       let hint = "";
+      let hintExtra = "";
       if (answer.extraTranslation) {
-        hint = `extra translation ${answer.extraTranslation} translation ${answer.word}`;
+        hint = `Translation - ${answer.word}`;
+        hintExtra = `Extra translation - ${answer.extraTranslation}`;
       } else {
-        hint = `translation ${answer.word}`;
+        hint = `Translation - ${answer.word}`;
       }
 
       return (
         <p className="study__result">
-          Right answer for{" "}
-          <span className="study__word-studying">{answer.word}</span>: {hint}
+          Right answer for:
+          <span className="study__word-studying"> {answer.word}</span>
+          <p>{hint}</p>
+          <p>{hintExtra}</p>
         </p>
       );
     });
@@ -204,8 +208,6 @@ export default function StudySet({ wordsToLearn }) {
         }
       });
     });
-
-    // console.log(wordsToLearn.data);
   }
 
   return (
