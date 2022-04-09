@@ -94,7 +94,7 @@ export default function StudySet({ wordsToLearn }) {
     event.preventDefault();
     const userAnswers = filterWordsData();
     const rightAnswers = [];
-    const wrongAnswers = [];
+    let wrongAnswers = [];
     userAnswers.forEach((userWord) => {
       if (userWord.extraTranslation) {
         rightAnswers.push(
@@ -132,6 +132,17 @@ export default function StudySet({ wordsToLearn }) {
         );
       }
     });
+
+    const inputs = document.querySelectorAll(".study__word-input");
+    [...inputs].forEach((input) => {
+      if (input.value === "") {
+        wrongAnswers.push(
+          ...wordsToLearn.data.filter((word) => word.id === input.id)
+        );
+      }
+    });
+
+    wrongAnswers = Array.from(new Set(wrongAnswers));
     updateResult(rightAnswers, wrongAnswers);
     displayResult(rightAnswers, wrongAnswers);
   }
@@ -157,16 +168,17 @@ export default function StudySet({ wordsToLearn }) {
     }
 
     const rightAnswerElement = wrongAnswers.map((answer) => {
-      let hint = ''
-      if(answer.extraTranslation){
-        hint = `extra translation ${answer.extraTranslation} translation ${answer.word}`
+      let hint = "";
+      if (answer.extraTranslation) {
+        hint = `extra translation ${answer.extraTranslation} translation ${answer.word}`;
       } else {
-        hint = `translation ${answer.word}`
+        hint = `translation ${answer.word}`;
       }
 
       return (
         <p className="study__result">
-          Right answer for <span className="study__word-studying">{answer.word}</span>: {hint}
+          Right answer for{" "}
+          <span className="study__word-studying">{answer.word}</span>: {hint}
         </p>
       );
     });
