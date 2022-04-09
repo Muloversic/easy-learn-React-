@@ -144,6 +144,8 @@ export default function StudySet({ wordsToLearn }) {
       }
     });
 
+  
+
     wrongAnswers = Array.from(new Set(wrongAnswers));
     updateResult(rightAnswers, wrongAnswers);
     displayResult(rightAnswers, wrongAnswers);
@@ -180,12 +182,12 @@ export default function StudySet({ wordsToLearn }) {
       }
 
       return (
-        <p className="study__result">
-          Right answer for:
+        <div className="study__result">
+          <h4 className="study__word-heading">Right answer for:</h4>
           <span className="study__word-studying"> {answer.word}</span>
-          <p>{hint}</p>
-          <p>{hintExtra}</p>
-        </p>
+          <span className="study__word-hint">{hint}</span>
+          <span className="study__word-hint">{hintExtra}</span>
+        </div>
       );
     });
 

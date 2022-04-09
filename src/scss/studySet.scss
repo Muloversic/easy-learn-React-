@@ -11,21 +11,32 @@
         display: flex;
         flex-direction: column;
         margin-top: 10px;
+        background-color: #fff;
+        padding: 5px;
+        &-heading{
+            color: $white;
+            display: inline-block;
+            font-size: 19px;
+        }
         &-studying{
             color: rgb(202, 202, 254);
-            font-size: 18px;
+            font-size: 19px;
         }
         &:first-child {
             margin-top: 0;
         }
         &-label {
-            color: $white;
+            color: $black;
             margin-bottom: 5px;
         }
+        &-hint{
+            display: block;
+        }
+      
     }
     &__result {
         color: $white;
-        margin-top: 5px;
+        margin-top: 10px;
     }
     &__button {
         margin-top: 10px;
