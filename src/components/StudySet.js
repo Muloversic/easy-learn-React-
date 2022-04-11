@@ -150,7 +150,7 @@ export default function StudySet({ wordsToLearn }) {
     });
 
     const buttonSubmit = document.querySelector(".study__button");
-    // buttonSubmit.setAttribute("disabled", true);
+    buttonSubmit.setAttribute("disabled", true);
 
     wrongAnswers = Array.from(new Set(wrongAnswers));
     updateResult(rightAnswers, wrongAnswers);

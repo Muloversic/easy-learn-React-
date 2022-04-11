@@ -1,7 +1,19 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { nanoid } from "nanoid";
+import { useNavigate } from "react-router-dom";
+
 export default function OpenSet({ collectionData, setWordsToLearn }) {
+  const [isReload, setIsReload] = useState(false);
+  let navigate = useNavigate();
+  // if(!collectionData) setIsReload(true)
+  useEffect(() => {
+    console.log('eff')
+    if (collectionData === undefined) {
+      return navigate("/sets");
+    }
+  });
+
   const wordsElements = collectionData.data.map((word) => {
     return (
       <div className="info__word" key={nanoid()}>
