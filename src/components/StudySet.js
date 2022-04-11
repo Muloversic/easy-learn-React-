@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { nanoid } from "nanoid";
+import { getDatabase, ref, onValue, update } from "firebase/database";
 export default function StudySet({ wordsToLearn }) {
   const [inputData, setInputData] = useState([]);
   const [wordsData, setWordsData] = useState([]);
   const [rightAnswersToDisplay, setRightAnswersToDisplay] = useState();
+  const [isWordsToDb, setIsWordsToDb] = useState(false);
   function getData(target, id, isExtraTranslation) {
     if (target.name === "Determination") {
       setInputData((prevData) => {
@@ -153,6 +155,8 @@ export default function StudySet({ wordsToLearn }) {
     wrongAnswers = Array.from(new Set(wrongAnswers));
     updateResult(rightAnswers, wrongAnswers);
     displayResult(rightAnswers, wrongAnswers);
+    setIsWordsToDb(prevValue => !prevValue) ;
+    // updateDataBase(wordsToLearn)
   }
 
   function displayResult(rightAnswers, wrongAnswers) {
@@ -219,14 +223,19 @@ export default function StudySet({ wordsToLearn }) {
           } else {
             word.progress -= 5;
           }
-          
+
           word.rightAnswers -= 1;
         }
       });
     });
-
-    console.log(wordsToLearn.data);
   }
+
+  useEffect(() => {
+    const db = getDatabase();
+    const updates = {};
+    updates["/sets/" + wordsToLearn.setName] = wordsToLearn;
+    update(ref(db), updates);
+  }, [isWordsToDb]);
 
   return (
     <main>
