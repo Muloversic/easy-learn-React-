@@ -61,34 +61,36 @@ export default function StudySet({ wordsToLearn }) {
 
   const wordsElements = wordsToLearn.data.map((word) => {
     let isExtraTranslation = false;
-    return (
-      <div className="study__word">
-        <label className="study__word-label">{word.word}</label>
-        <input
-          id={word.id}
-          type="text"
-          name="Determination"
-          className="study__word-input"
-          onChange={(event) =>
-            getData(event.target, word.id, isExtraTranslation)
-          }
-        />
-        {word.extraTranslation && (
-          <>
-            <label className="study__word-label">Second translation</label>
-            <input
-              id={word.id + "-extr"}
-              type="text"
-              name="extraTranslation"
-              className="study__word-input"
-              onChange={(event) =>
-                getData(event.target, word.id, (isExtraTranslation = true))
-              }
-            />
-          </>
-        )}
-      </div>
-    );
+    if (word.progress !== 100) {
+      return (
+        <div className="study__word">
+          <label className="study__word-label">{word.word}</label>
+          <input
+            id={word.id}
+            type="text"
+            name="Determination"
+            className="study__word-input"
+            onChange={(event) =>
+              getData(event.target, word.id, isExtraTranslation)
+            }
+          />
+          {word.extraTranslation && (
+            <>
+              <label className="study__word-label">Second translation</label>
+              <input
+                id={word.id + "-extr"}
+                type="text"
+                name="extraTranslation"
+                className="study__word-input"
+                onChange={(event) =>
+                  getData(event.target, word.id, (isExtraTranslation = true))
+                }
+              />
+            </>
+          )}
+        </div>
+      );
+    }
   });
 
   function checkAnswers(event) {
@@ -146,7 +148,7 @@ export default function StudySet({ wordsToLearn }) {
     });
 
     const buttonSubmit = document.querySelector(".study__button");
-    buttonSubmit.setAttribute("disabled", true);
+    // buttonSubmit.setAttribute("disabled", true);
 
     wrongAnswers = Array.from(new Set(wrongAnswers));
     updateResult(rightAnswers, wrongAnswers);
@@ -177,10 +179,10 @@ export default function StudySet({ wordsToLearn }) {
       let hint = "";
       let hintExtra = "";
       if (answer.extraTranslation) {
-        hint = `Translation - ${answer.word}`;
+        hint = `Translation - ${answer.translation}`;
         hintExtra = `Extra translation - ${answer.extraTranslation}`;
       } else {
-        hint = `Translation - ${answer.word}`;
+        hint = `Translation - ${answer.translation}`;
       }
 
       return (
@@ -212,6 +214,8 @@ export default function StudySet({ wordsToLearn }) {
         }
       });
     });
+
+    console.log(wordsToLearn.data);
   }
 
   return (
@@ -222,7 +226,9 @@ export default function StudySet({ wordsToLearn }) {
           {rightAnswersToDisplay}
         </div>
         <button className="study__button">Submit answers</button>
-        <Link to="/open-set" className="study__link">Go back to set</Link>
+        <Link to="/open-set" className="study__link">
+          Go back to set
+        </Link>
       </form>
     </main>
   );
