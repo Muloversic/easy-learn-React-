@@ -6,7 +6,7 @@ export default function OpenSet({ collectionData, setWordsToLearn }) {
     return (
       <div className="info__word" key={nanoid()}>
         <div className="info__word-block">
-          <h3 className="info__word-label">Term</h3>
+          <h3 className="info__word-label">Term {word.progress}%</h3>
           <h4 className="info__word-input">{word.word}</h4>
         </div>
         <div className="info__word-block">
@@ -19,6 +19,9 @@ export default function OpenSet({ collectionData, setWordsToLearn }) {
             <h4 className="info__word-input">{word.extraTranslation}</h4>
           </div>
         )}
+        {word.progress === 100 ? (
+          <span className="info__word-done">learned</span>
+        ) : null}
       </div>
     );
   });

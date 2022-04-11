@@ -37,8 +37,9 @@
 
     &__word {
         display: flex;
+        position: relative;
         background-color: $white;
-        padding: 7px;
+        padding: 7px 7px 35px 7px;
         margin-top: 10px;
         flex-wrap: wrap;
         &-block {
@@ -57,6 +58,17 @@
         &-secondary {
             margin-top: 10px;
             flex: 0 1 100%;
+        }
+        &-done{
+            position: absolute;
+            bottom: 10%;
+            right: 10%;
+            transform: rotate(5deg);
+            letter-spacing: .4em;
+            text-transform: uppercase;
+            padding: 2px;
+            color: $color-done;
+            border: 2.2px dashed $primary;
         }
     }
 }
