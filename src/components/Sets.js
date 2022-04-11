@@ -27,6 +27,13 @@ export default function Sets({ setCollectionData }) {
     }
 
     var setElement = dataArray.map((set) => {
+      let setProgress = 0;
+      set.data.forEach((element) => {
+        setProgress += element.progress;
+      });
+
+      setProgress = (setProgress / set.data.length).toFixed(2);
+
       return (
         <div className="sets__item" key={nanoid()}>
           <Link
@@ -37,7 +44,7 @@ export default function Sets({ setCollectionData }) {
           <h2 className="sets__item-info">{set.setName}</h2>
           <p className="sets__item-info">{set.description}</p>
           <span className="sets__item-info">Phreases {set.data.length}</span>
-          <span className="sets__item-info">hard coded pr</span>
+          <span className="sets__item-info">Set progress {setProgress}%</span>
         </div>
       );
     });
