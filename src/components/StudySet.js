@@ -202,14 +202,24 @@ export default function StudySet({ wordsToLearn }) {
     wordsToLearn.data.forEach((word) => {
       rightAnswers.forEach((rightWord) => {
         if (word.id === rightWord.id) {
-          word.progress += 10;
+          if (word.rightAnswers < 14) {
+            word.progress += 5;
+          } else {
+            word.progress += 10;
+          }
+
           word.rightAnswers += 1;
         }
       });
 
       wrongAnswers.forEach((wrongWord) => {
         if (word.id === wrongWord.id && word.progress > 0) {
-          word.progress -= 10;
+          if (word.rightAnswers > 14) {
+            word.progress -= 10;
+          } else {
+            word.progress -= 5;
+          }
+          
           word.rightAnswers -= 1;
         }
       });
