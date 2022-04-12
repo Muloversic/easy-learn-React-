@@ -1,4 +1,26 @@
 @import "./variables.scss";
+.new-set{
+    position: relative;
+    &__error{
+        position: absolute;
+        bottom: 0;
+        right: 50%;
+        transform: translate(50%, 0);
+        color: $error;
+        background-color: $white;
+        border: 1px solid $error;
+        padding: 5px;
+        &--fade{
+            opacity: 1;
+            animation: fade 3.5s forwards;
+        }
+        @keyframes fade {
+            0% {opacity: 1;}
+            50% {opacity: 0.5;}
+            100% {opacity: 0;}
+          }
+    }
+}
 .form {
     display: flex;
     flex-direction: column;
@@ -103,4 +125,5 @@
             padding: 10px 25px;
         }
     }
+    
 }

@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 export default function NewSet(props) {
   const [wordsData, setWordsData] = useState([]);
   const [collectionInfo, setCollectionInfo] = useState([]);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isShowAlert, setIsShowAlert] = useState(false);
   const [newWordElement, setNewWordElement] = useState([
     <NewWord
       key={nanoid()}
@@ -16,6 +18,15 @@ export default function NewSet(props) {
       setWordsData={setWordsData}
     />,
   ]);
+  useEffect(() => {
+    const errorMessage = document.querySelector(".new-set__error");
+    if (isShowAlert) {
+      errorMessage.classList.add("new-set__error--fade");
+      setTimeout(() => {
+        setIsShowAlert(false);
+      }, 4000);
+    }
+  }, [isShowAlert]);
 
   function addWord(event) {
     event.preventDefault();
@@ -62,15 +73,15 @@ export default function NewSet(props) {
     console.log(collectionInfo);
     console.log(data);
     const db = getDatabase();
-    try{
+    try {
       set(ref(db, "sets/" + collectionInfo.setName), {
         description: collectionInfo.setInfo,
         setName: collectionInfo.setName,
         data,
       });
-    }
-    catch(err){
-      console.log(err)
+      setIsSuccess(true);
+    } catch (err) {
+      setIsShowAlert(true);
     }
   }
 
@@ -85,10 +96,15 @@ export default function NewSet(props) {
           </button>
           <button onClick={createSet} className="form__button-create">
             Create new set
-            <Link to='/sets' className="form__link"></Link>
+            {isSuccess && <Link to="/sets" className="form__link"></Link>}
           </button>
         </div>
       </form>
+      {isShowAlert && (
+        <div className="new-set__error">
+          <p className="new-set__error-message">An error occured!</p>
+        </div>
+      )}
     </main>
   );
 }
