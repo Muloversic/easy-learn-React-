@@ -3,6 +3,7 @@ import { nanoid } from "nanoid";
 import NewWord from "./NewWord";
 import NewSetInfo from "./NewSetInfo";
 import { getDatabase, ref, set } from "firebase/database";
+import { Link } from "react-router-dom";
 
 export default function NewSet(props) {
   const [wordsData, setWordsData] = useState([]);
@@ -40,7 +41,7 @@ export default function NewSet(props) {
     for (let data in wordsData) {
       allData.push(wordsData[data]);
     }
-    
+
     const tmpArray = [];
     function itemCheck(item) {
       if (tmpArray.indexOf(item.id) === -1) {
@@ -61,11 +62,16 @@ export default function NewSet(props) {
     console.log(collectionInfo);
     console.log(data);
     const db = getDatabase();
-    set(ref(db, "sets/" + collectionInfo.setName), {
-      description: collectionInfo.setInfo,
-      setName: collectionInfo.setName,
-      data,
-    });
+    try{
+      set(ref(db, "sets/" + collectionInfo.setName), {
+        description: collectionInfo.setInfo,
+        setName: collectionInfo.setName,
+        data,
+      });
+    }
+    catch(err){
+      console.log(err)
+    }
   }
 
   return (
@@ -79,6 +85,7 @@ export default function NewSet(props) {
           </button>
           <button onClick={createSet} className="form__button-create">
             Create new set
+            <Link to='/sets' className="form__link"></Link>
           </button>
         </div>
       </form>
