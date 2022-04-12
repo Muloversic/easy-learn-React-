@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 import "./scss/index.scss";
 import Header from "./components/Header";
@@ -10,6 +15,7 @@ import StudySet from "./components/StudySet";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { useEffect, useState } from "react";
+// import { useNavigate } from "react-router-dom";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -28,6 +34,7 @@ function App() {
   const app = initializeApp(firebaseConfig);
   const [collectionData, setCollectionData] = useState();
   const [wordsToLearn, setWordsToLearn] = useState();
+
   const subLinks = [
     {
       href: "/sets",
@@ -94,11 +101,34 @@ function App() {
           <Route path="/new-set" element={<NewSet />} />
           <Route
             path="/open-set"
-            element={<OpenSet collectionData={collectionData} setWordsToLearn={setWordsToLearn}/>}
+            element={
+              collectionData ? (
+                <OpenSet
+                  collectionData={collectionData}
+                  setWordsToLearn={setWordsToLearn}
+                />
+              ) : (
+                <Navigate replace to="/sets" />
+              )
+            }
           />
           <Route
             path="/learning"
-            element={<StudySet  wordsToLearn={wordsToLearn}/>}
+            element={
+              collectionData ? (
+                <StudySet wordsToLearn={wordsToLearn} />
+              ) : (
+                <Navigate replace to="/sets" />
+              )
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <main style={{ padding: "1rem" }}>
+                <p>There's nothing here!</p>
+              </main>
+            }
           />
         </Routes>
       </Router>
