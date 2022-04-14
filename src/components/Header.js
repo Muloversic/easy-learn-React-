@@ -1,14 +1,16 @@
 import { nanoid } from "nanoid";
+import { Link, useLocation } from "react-router-dom";
 import { React, useState, useEffect } from "react";
 export default function Header({ links, subLinks }) {
+  const location = useLocation();
   const [burger, setBurger] = useState(false);
-  const page = window.location.pathname.slice(1);
+  const page = location.pathname.slice(1);
   const subItemLinks = subLinks.map((links) => {
     return (
       <li className="navigation__item" key={nanoid()}>
-        <a href={links.href} className="navigation__link">
+        <Link to={links.href} className="navigation__link">
           <i className=" material-icons">{links.icon}</i>
-        </a>
+        </Link>
       </li>
     );
   });
@@ -23,20 +25,21 @@ export default function Header({ links, subLinks }) {
       href = link.href;
       icon = link.icon;
     } else {
+     
       for (let subItem in link.value) {
         if (subItem === page) {
           title = link.value[subItem].subValue;
-          href = link.value[subItem].href;
+          href = link.value[subItem].href || '/';
         }
       }
     }
 
     return (
       <li className="navigation__item" key={nanoid()}>
-        <a href={href} className="navigation__link">
+        <Link to={href} className="navigation__link">
           {title}
           <i className="material-icons">{icon}</i>
-        </a>
+        </Link>
       </li>
     );
   });
@@ -50,21 +53,17 @@ export default function Header({ links, subLinks }) {
   useEffect(() => {
     const burgerItem = document.querySelector(".navigation__burger");
     [...navItems].forEach((navItem, index) => {
-      if (index === 2) {
-        navItem.classList.add("navigation__item--active");
-      }
-
       if (burger) {
-        navItem.classList.remove("navigation__item--active");
-        burgerItem.classList.remove("navigation__burger--active");
-        if (index === 2) {
-          navItem.classList.add("navigation__item--active");
-        }
-      } else {
         navItem.classList.add("navigation__item--active");
         burgerItem.classList.add("navigation__burger--active");
         if (index === 2) {
-          navItem.classList.remove("navigation__item--active");
+          navItem.style.display = 'none';
+        }
+      } else {
+        navItem.classList.remove("navigation__item--active");
+        burgerItem.classList.remove("navigation__burger--active");
+        if (index === 2) {
+          navItem.style.display = 'block';
         }
       }
     });

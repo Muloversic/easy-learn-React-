@@ -53,6 +53,9 @@ $burger-bg:rgb(164, 155, 252);
         &:last-child {
             margin-left: auto;
         }
+        &:nth-child(3){
+            display: block;
+        }
         &--active {
             display: block;
             z-index: 1;
