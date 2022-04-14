@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { nanoid } from "nanoid";
-import { getDatabase, ref, onValue, update } from "firebase/database";
+import { getDatabase, ref, update } from "firebase/database";
 export default function StudySet({ wordsToLearn }) {
   const [inputData, setInputData] = useState([]);
   const [wordsData, setWordsData] = useState([]);
-  const [rightAnswersToDisplay, setRightAnswersToDisplay] = useState();
+  const [rightAnswersToDisplay, setRightAnswersToDisplay] = useState([]);
   const [isWordsToDb, setIsWordsToDb] = useState(false);
   function getData(target, id, isExtraTranslation) {
     if (target.name === "Determination") {
@@ -155,8 +154,7 @@ export default function StudySet({ wordsToLearn }) {
     wrongAnswers = Array.from(new Set(wrongAnswers));
     updateResult(rightAnswers, wrongAnswers);
     displayResult(rightAnswers, wrongAnswers);
-    setIsWordsToDb(prevValue => !prevValue) ;
-    // updateDataBase(wordsToLearn)
+    setIsWordsToDb((prevValue) => !prevValue);
   }
 
   function displayResult(rightAnswers, wrongAnswers) {
@@ -179,27 +177,39 @@ export default function StudySet({ wordsToLearn }) {
       }
     }
 
-    const rightAnswerElement = wrongAnswers.map((answer) => {
-      let hint = "";
-      let hintExtra = "";
-      if (answer.extraTranslation) {
-        hint = `Translation - ${answer.translation}`;
-        hintExtra = `Extra translation - ${answer.extraTranslation}`;
+    function drawResult() {
+      if (wrongAnswers.length > 0) {
+        const rightAnswerElement = wrongAnswers.map((answer) => {
+          let hint = "";
+          let hintExtra = "";
+          if (answer.extraTranslation) {
+            hint = `Translation - ${answer.translation}`;
+            hintExtra = `Extra translation - ${answer.extraTranslation}`;
+          } else {
+            hint = `Translation - ${answer.translation}`;
+          }
+
+          return (
+            <div className="study__result">
+              <h4 className="study__word-heading">Right answer for:</h4>
+              <span className="study__word-studying"> {answer.word}</span>
+              <span className="study__word-hint">{hint}</span>
+              <span className="study__word-hint">{hintExtra}</span>
+            </div>
+          );
+        });
+        return rightAnswerElement;
       } else {
-        hint = `Translation - ${answer.translation}`;
+        return (
+          <span className="study__word-done">
+            You're doing great, go back to set and repeat! Progress +
+          </span>
+        );
       }
+    }
 
-      return (
-        <div className="study__result">
-          <h4 className="study__word-heading">Right answer for:</h4>
-          <span className="study__word-studying"> {answer.word}</span>
-          <span className="study__word-hint">{hint}</span>
-          <span className="study__word-hint">{hintExtra}</span>
-        </div>
-      );
-    });
-
-    setRightAnswersToDisplay(rightAnswerElement);
+    const drawResultElement = drawResult();
+    setRightAnswersToDisplay(drawResultElement);
   }
 
   function updateResult(rightAnswers, wrongAnswers) {

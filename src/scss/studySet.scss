@@ -33,6 +33,10 @@
         &-hint{
             display: block;
         }
+        &-done{
+            color: $white;
+            margin-top: 5px;
+        }
       
     }
     &__result {
