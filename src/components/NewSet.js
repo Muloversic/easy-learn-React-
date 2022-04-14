@@ -95,7 +95,7 @@ export default function NewSet(props) {
             add_circle_outline
           </button>
           <button onClick={createSet} className="form__button-create">
-            Create new set
+            {isSuccess ? "Go to sets" : "Create new set"}
             {isSuccess && <Link to="/sets" className="form__link"></Link>}
           </button>
         </div>
