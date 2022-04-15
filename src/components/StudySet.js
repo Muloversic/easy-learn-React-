@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getDatabase, ref, update } from "firebase/database";
-export default function StudySet({ wordsToLearn }) {
+import StudySetPresets from "./StudySetPresets";
+export default function StudySet({ wordsToLearn, studyPresets }) {
   const [inputData, setInputData] = useState([]);
   const [wordsData, setWordsData] = useState([]);
   const [rightAnswersToDisplay, setRightAnswersToDisplay] = useState([]);
   const [isWordsToDb, setIsWordsToDb] = useState(false);
+  let [wordOrder, setWordOrder] = useState(0);
   function getData(target, id, isExtraTranslation) {
     if (target.name === "Determination") {
       setInputData((prevData) => {
@@ -60,39 +62,29 @@ export default function StudySet({ wordsToLearn }) {
     return dataReady.reverse();
   }
 
-  const wordsElements = wordsToLearn.data.map((word) => {
-    let isExtraTranslation = false;
-    if (word.progress !== 100) {
-      return (
-        <div className="study__word">
-          <label className="study__word-label">{word.word}</label>
-          <input
-            id={word.id}
-            type="text"
-            name="Determination"
-            className="study__word-input"
-            onChange={(event) =>
-              getData(event.target, word.id, isExtraTranslation)
-            }
-          />
-          {word.extraTranslation && (
-            <>
-              <label className="study__word-label">Second translation</label>
-              <input
-                id={word.id + "-extr"}
-                type="text"
-                name="extraTranslation"
-                className="study__word-input"
-                onChange={(event) =>
-                  getData(event.target, word.id, (isExtraTranslation = true))
-                }
-              />
-            </>
-          )}
-        </div>
-      );
-    }
-  });
+  function nextWord(event) {
+    event.preventDefault();
+    setWordOrder((prevValue) => prevValue + 1);
+  }
+
+  // // Option 1
+  // const wordsAllElements = wordsToLearn.data.map((word) => {
+  //   if (word.progress !== 100) {
+  //     return wordBody(word);
+  //   }
+  // });
+
+  // // Option 2
+  // const wordOneByOneElement = wordsToLearn.data.map((word, i) => {
+  //   if (word.progress !== 100 && wordOrder === i) {
+  //     return wordBody(word);
+  //   }
+  // });
+
+  // function wordBody(word) {
+  //   let isExtraTranslation = false;
+
+  // }
 
   function checkAnswers(event) {
     event.preventDefault();
@@ -251,10 +243,19 @@ export default function StudySet({ wordsToLearn }) {
     <main>
       <form className="study" onSubmit={checkAnswers}>
         <div className="study__elements">
-          {wordsElements}
+          <StudySetPresets
+            wordsToLearn={wordsToLearn}
+            wordOrder={wordOrder}
+            getData={getData}
+            studyPresets={studyPresets}
+          />
           {rightAnswersToDisplay}
         </div>
+
         <button className="study__button">Submit answers</button>
+        <button className="study__button" onClick={nextWord}>
+          Submit answers
+        </button>
         <Link to="/open-set" className="study__link">
           Go back to set
         </Link>

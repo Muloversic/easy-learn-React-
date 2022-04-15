@@ -35,6 +35,7 @@ function App() {
   const [collectionData, setCollectionData] = useState();
   const [wordsToLearn, setWordsToLearn] = useState();
 
+  // const [studyPresets, setStudyPresets] = useState(false);
   const subLinks = [
     {
       href: "/sets",
@@ -106,6 +107,7 @@ function App() {
                 <OpenSet
                   collectionData={collectionData}
                   setWordsToLearn={setWordsToLearn}
+                
                 />
               ) : (
                 <Navigate replace to="/sets" />
@@ -114,9 +116,10 @@ function App() {
           />
           <Route
             path="/learning"
+          
             element={
               collectionData ? (
-                <StudySet wordsToLearn={wordsToLearn} />
+                <StudySet wordsToLearn={wordsToLearn}   />
               ) : (
                 <Navigate replace to="/sets" />
               )
