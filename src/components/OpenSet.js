@@ -1,10 +1,9 @@
 import { Link } from "react-router-dom";
 import { nanoid } from "nanoid";
-import { useState } from "react";
 export default function OpenSet({
   collectionData,
   setWordsToLearn,
-  setWordsToLearn2,
+  setStudyPresets,
 }) {
   const wordsElements = collectionData.data.map((word) => {
     return (
@@ -30,21 +29,22 @@ export default function OpenSet({
     );
   });
 
+  function handleClick(mode) {
+    setWordsToLearn(collectionData);
+    setStudyPresets(mode)
+  }
+  
   return (
     <main className="info">
       <div className="info__set-info">
         <h2 className="info__set-title">{collectionData.setName}</h2>
         <p className="info__set-description">{collectionData.description}</p>
-        <button
-          className="info__set-button"
-          onClick={() => setWordsToLearn(collectionData)}
-        >
+        {/* ATm - All together mode*/}
+        <button className="info__set-button" onClick={() => handleClick("ATm")}>
           <Link to="/learning">Study words (all together mode)</Link>
         </button>
-        <button
-          className="info__set-button"
-          onClick={() => setWordsToLearn(collectionData)}
-        >
+        {/* OBOm - One by one mode*/}
+        <button className="info__set-button" onClick={() => handleClick("OBOm")}>
           <Link to="/learning">Study words (one by one mode)</Link>
         </button>
         <div className="info__words">{wordsElements}</div>

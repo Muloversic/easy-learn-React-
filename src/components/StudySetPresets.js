@@ -1,5 +1,10 @@
-export default function StudySetPresets({ wordsToLearn, wordOrder, getData, studyPresets }) {
-  console.log(studyPresets)
+export default function StudySetPresets({
+  wordsToLearn,
+  wordOrder,
+  getData,
+  studyPresets,
+}) {
+
   // Option 1
   const wordsAllElements = wordsToLearn.data.map((word) => {
     if (word.progress !== 100) {
@@ -46,5 +51,11 @@ export default function StudySetPresets({ wordsToLearn, wordOrder, getData, stud
     );
   }
 
-  return <>{wordsAllElements}</>;
+  let elementToDisplay = [];
+  if (studyPresets === "OBOm") {
+    elementToDisplay = wordOneByOneElement;
+  } else if (studyPresets === "ATm") {
+    elementToDisplay = wordsAllElements;
+  }
+  return <>{elementToDisplay}</>;
 }
