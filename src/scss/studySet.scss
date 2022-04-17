@@ -1,7 +1,7 @@
 @import "./variables.scss";
+@import "./keyframes.scss";
 .study {
     margin: 50px 0;
-
     display: flex;
     flex-direction: column;
     &__elements {
@@ -14,12 +14,13 @@
         margin-top: 10px;
         background-color: #fff;
         padding: 5px;
-        &-heading{
+        animation: append 1.5s forwards;
+        &-heading {
             color: $white;
             display: inline-block;
             font-size: 19px;
         }
-        &-studying{
+        &-studying {
             color: $learningWord;
             font-size: 19px;
         }
@@ -30,26 +31,27 @@
             color: $black;
             margin-bottom: 5px;
         }
-        &-hint{
+        &-hint {
             display: block;
         }
-        &-done{
+        &-done {
             color: $white;
             margin-top: 5px;
+            animation: append 1.5s forwards;
         }
-      
     }
     &__result {
         color: $white;
         margin-top: 10px;
+        animation: append 1.5s forwards;
     }
     &__button {
         margin-top: 10px;
         background-color: transparent;
-        border:  1px solid $white;
+        border: 1px solid $white;
         color: $white;
         padding: 10px;
-        &:disabled{
+        &:disabled {
             color: $disabled;
         }
     }
