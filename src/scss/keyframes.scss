@@ -6,6 +6,14 @@
         opacity: 1;
     }
 }
+@keyframes fade {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
 @keyframes fadeFromZero {
     0% {
         opacity: 1;
