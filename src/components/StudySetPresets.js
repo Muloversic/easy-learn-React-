@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 export default function StudySetPresets({
   wordsToLearn,
   wordOrder,
@@ -26,7 +25,7 @@ export default function StudySetPresets({
     } else if (wordOrder === arr.length && i === arr.length - 1) {
       buttonNext.setAttribute("disabled", "");
       buttonSubmit.setAttribute("disabled", "");
-      return <p className="study__word-done">Youre done!</p>;
+      return <p className="study__word-done">You're done!</p>;
     }
   });
 
