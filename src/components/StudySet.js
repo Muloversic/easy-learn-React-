@@ -8,7 +8,16 @@ export default function StudySet({ wordsToLearn, studyPresets }) {
   const [rightAnswersToDisplay, setRightAnswersToDisplay] = useState([]);
   const [isWordsToDb, setIsWordsToDb] = useState(false);
   let [wordOrder, setWordOrder] = useState(0);
+
+  useEffect(() => {
+    if (studyPresets === "OBOm") {
+      const buttonNext = document.querySelector(".study__button--next");
+      buttonNext.setAttribute("disabled", "");
+    }
+  }, [wordOrder]);
+
   function getData(target, id, isExtraTranslation) {
+    // write input values to the state
     if (target.name === "Determination") {
       setInputData((prevData) => {
         return {
@@ -34,6 +43,7 @@ export default function StudySet({ wordsToLearn, studyPresets }) {
   }
 
   useEffect(() => {
+    // update words data when input was triggered
     setWordsData((prevData) => {
       return {
         ...prevData,
@@ -50,6 +60,7 @@ export default function StudySet({ wordsToLearn, studyPresets }) {
 
     const tmpArray = [];
     function itemCheck(item) {
+      // removing duplicates
       if (tmpArray.indexOf(item.id) === -1) {
         tmpArray.push(item.id);
         return true;
@@ -63,30 +74,17 @@ export default function StudySet({ wordsToLearn, studyPresets }) {
   }
 
   function nextWord(event) {
+    // show next word
     event.preventDefault();
     setWordOrder((prevValue) => prevValue + 1);
+    // clean old answer hint. Enable submit button, so user can check answer(One by one mode)
+    setRightAnswersToDisplay(null);
+    const buttonSubmit = document.querySelector(".study__button");
+    buttonSubmit.removeAttribute("disabled");
   }
 
-  // // Option 1
-  // const wordsAllElements = wordsToLearn.data.map((word) => {
-  //   if (word.progress !== 100) {
-  //     return wordBody(word);
-  //   }
-  // });
-
-  // // Option 2
-  // const wordOneByOneElement = wordsToLearn.data.map((word, i) => {
-  //   if (word.progress !== 100 && wordOrder === i) {
-  //     return wordBody(word);
-  //   }
-  // });
-
-  // function wordBody(word) {
-  //   let isExtraTranslation = false;
-
-  // }
-
   function checkAnswers(event) {
+    // check user answers and create arrays with wrong and right
     event.preventDefault();
     const userAnswers = filterWordsData();
     const rightAnswers = [];
@@ -139,17 +137,23 @@ export default function StudySet({ wordsToLearn, studyPresets }) {
         );
       }
     });
+    // disable button when user click "Submit answers"
+    const buttonSubmit = document.querySelector(".study__button--check");
+    buttonSubmit.setAttribute("disabled", "");
+    if (studyPresets === "OBOm") {
+      //enable 'next button' if mode is 'One by one'
+      const buttonNext = document.querySelector(".study__button--next");
+      buttonNext.removeAttribute("disabled");
+    }
 
-    const buttonSubmit = document.querySelector(".study__button");
-    buttonSubmit.setAttribute("disabled", true);
-
-    wrongAnswers = Array.from(new Set(wrongAnswers));
+    wrongAnswers = Array.from(new Set(wrongAnswers)); // removing duplicated arrays
     updateResult(rightAnswers, wrongAnswers);
     displayResult(rightAnswers, wrongAnswers);
-    setIsWordsToDb((prevValue) => !prevValue);
+    setIsWordsToDb((prevValue) => !prevValue); // allow db update
   }
 
   function displayResult(rightAnswers, wrongAnswers) {
+    // looping through arrays, getting inputs and mark them as right or wrong
     rightAnswers.forEach((answer) => {
       const rightInput = document.querySelector(`#${answer.id}`);
       const rightInputExtr = document.querySelector(`#${answer.id}-extr`);
@@ -163,13 +167,14 @@ export default function StudySet({ wordsToLearn, studyPresets }) {
     });
 
     function colorizeInputs(input, inputExtr, color) {
-      input.style.borderColor = color;
+      if (input) input.style.borderColor = color;
       if (inputExtr) {
         inputExtr.style.borderColor = color;
       }
     }
 
     function drawResult() {
+      // show right answers to user
       if (wrongAnswers.length > 0) {
         const rightAnswerElement = wrongAnswers.map((answer) => {
           let hint = "";
@@ -193,8 +198,9 @@ export default function StudySet({ wordsToLearn, studyPresets }) {
         return rightAnswerElement;
       } else {
         return (
+          // if all answers were correct
           <span className="study__word-done">
-            You're doing great, go back to set and repeat! Progress +
+            You're doing great! Progress changed
           </span>
         );
       }
@@ -205,6 +211,7 @@ export default function StudySet({ wordsToLearn, studyPresets }) {
   }
 
   function updateResult(rightAnswers, wrongAnswers) {
+    // updating each word progress
     wordsToLearn.data.forEach((word) => {
       rightAnswers.forEach((rightWord) => {
         if (word.id === rightWord.id) {
@@ -233,6 +240,7 @@ export default function StudySet({ wordsToLearn, studyPresets }) {
   }
 
   useEffect(() => {
+    // update db when user click "Submit answer"
     const db = getDatabase();
     const updates = {};
     updates["/sets/" + wordsToLearn.setName] = wordsToLearn;
@@ -241,21 +249,18 @@ export default function StudySet({ wordsToLearn, studyPresets }) {
 
   return (
     <main>
-      <form className="study" onSubmit={checkAnswers}>
+      <form className="study">
         <div className="study__elements">
+          {rightAnswersToDisplay}
           <StudySetPresets
             wordsToLearn={wordsToLearn}
             wordOrder={wordOrder}
             getData={getData}
             studyPresets={studyPresets}
+            checkAnswers={checkAnswers}
+            nextWord={nextWord}
           />
-          {rightAnswersToDisplay}
         </div>
-
-        <button className="study__button">Submit answers</button>
-        <button className="study__button" onClick={nextWord}>
-          Submit answers
-        </button>
         <Link to="/open-set" className="study__link">
           Go back to set
         </Link>
