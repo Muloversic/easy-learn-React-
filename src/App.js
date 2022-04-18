@@ -12,9 +12,11 @@ import Sets from "./components/Sets";
 import NewSet from "./components/NewSet";
 import OpenSet from "./components/OpenSet";
 import StudySet from "./components/StudySet";
+import Welcome from "./components/Welcome";
+import Profile from "./components/Profile";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -93,8 +95,9 @@ function App() {
       <Router>
         <Header links={links} subLinks={subLinks} />
         <Routes>
-          <Route path="/" />
+          <Route path="/" element={<Welcome/>}/>
           <Route path="/settings" element={<Settings />} />
+          <Route path="/profile" element={<Profile />} />
           <Route
             path="/sets"
             element={<Sets setCollectionData={setCollectionData} />}
