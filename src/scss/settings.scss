@@ -2,6 +2,14 @@
 .settings {
     display: flex;
     flex-direction: column;
+    &__input {
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid $white;
+        color: $white;
+        outline: none;
+    }
+
     &__user {
         &-title {
             color: $white;
@@ -9,10 +17,26 @@
             border-bottom: 1px solid $white;
             padding-bottom: 5px;
         }
+
         &-label {
             display: inline-block;
             color: $white;
             margin: 10px 0;
+        }
+
+        &-name {
+            color: $white;
+            display: inline-block;
+            margin: 5px 0;
+        }
+
+        &-data{
+            display: flex;
+            flex-direction: column;
+            background: $primary;
+            margin-top: 10px;
+            padding: 0 5px 5px;
+            border-radius: 3px;
         }
     }
 
@@ -33,7 +57,6 @@
 
     &__input-button {
         width: 100%;
-        max-width: 290px;
         height: 30px;
         background: $primary;
         color: #fff;
@@ -44,14 +67,13 @@
         justify-content: flex-start;
         border-radius: 3px;
         cursor: pointer;
-        margin: 0 auto;
     }
 
     &__input-text {
         line-height: 1;
         margin-top: 1px;
     }
-    
+
     &__icon-wrapper {
         height: 30px;
         width: 60px;
