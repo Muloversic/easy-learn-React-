@@ -1,0 +1,35 @@
+@import "./variables.scss";
+.profile{
+    display: flex;
+    flex-direction: column;
+    &__user{
+        display: flex;
+        align-items: center;
+        &-name{
+            color: $white;
+            font-size: 1.4em;
+            margin-left: 20px;
+        }
+        &-photo{
+            width: 90px;
+            height: 90px;
+            object-fit: cover;
+        }
+    }
+    &__statistic{
+        margin-top: 10px;
+        &-title{
+            color: $white;
+            font-size: 1.2em;
+            border-bottom: 1px solid $white;
+            padding-bottom: 5px;
+        }
+    }
+    &__list{
+        margin-top: 5px;
+        &-item{
+            color: $white;
+            margin-top: 5px;
+        }
+    }
+}
