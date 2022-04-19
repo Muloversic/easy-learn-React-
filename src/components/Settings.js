@@ -70,6 +70,8 @@ export default function Settings() {
         <div className="settings__user">
           <h2 className="settings__user-title">
             Choose profile photo and wirte your nickname
+            <br />
+            <span> *all changes are automatically saved</span>
           </h2>
           <div className="settings__preview">
             <h3 className="settings__preview-title">Preview</h3>

@@ -46,6 +46,9 @@
             font-size: 1.2em;
             border-bottom: 1px solid $white;
             padding-bottom: 5px;
+            span{
+                font-size: 0.7em;
+            }
         }
 
         &-label {
