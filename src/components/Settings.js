@@ -1,11 +1,58 @@
-export default function Settings() {
-  const inputFile = document.querySelector(".settings__input-file");
-  const preview = document.querySelector(".settings__img-preview");
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
+import { useState, useEffect } from "react";
 
-  function handleFiles(files) {
-    console.log(files);
-    
+export default function Settings() {
+  const [file, setFile] = useState("");
+  const [downloadProgress, setDownloadProgress] = useState("");
+  const [preview, setPreview] = useState("");
+  useEffect(() => {
+    const storage = getStorage();
+    const storageRef = ref(storage, "user-photo");
+    if (file !== "") {
+      const uploadTask = uploadBytesResumable(storageRef, file);
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          // Get task progress, including the number of bytes uploaded and the total number
+          // of bytes to be uploaded
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setDownloadProgress("Upload is " + progress.toFixed(2) + "% done");
+        },
+        (error) => {
+          switch (error.code) {
+            case "storage/unauthorized":
+              // User doesn't have permission to access the object
+              break;
+            case "storage/unknown":
+              // Unknown error occurred, inspect error.serverResponse
+              break;
+            case "storage/retry-limit-exceeded":
+              // The maximum time limit on an operation (upload, download, delete, etc.)
+              // has been excceded. Try uploading again.
+              break;
+          }
+        },
+        () => {
+          // Upload completed successfully, now we can get the download URL
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            setPreview(downloadURL)
+            console.log("File available at", downloadURL);
+          });
+        }
+      );
+    }
+  }, [file]);
+
+  function handleFiles(event) {
+    setFile(document.querySelector(".settings__input-file").files[0]);
   }
+
   return (
     <main className="main">
       <div className="main__settings settings">
@@ -38,6 +85,8 @@ export default function Settings() {
             </label>
             <div className="settings__img-preview"></div>
           </div>
+          <p>{downloadProgress}</p>
+          <img className="profile__user-photo" src={preview} alt="user"/>
         </div>
       </div>
     </main>
