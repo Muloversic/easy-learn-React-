@@ -9,7 +9,10 @@ import { useState, useEffect } from "react";
 export default function Settings() {
   const [file, setFile] = useState("");
   const [downloadProgress, setDownloadProgress] = useState("");
-  const [preview, setPreview] = useState("");
+  const [preview, setPreview] = useState({
+    userNickname: "GoodLearner7",
+    userPhoto: "",
+  });
   useEffect(() => {
     const storage = getStorage();
     const storageRef = ref(storage, "user-photo");
@@ -40,9 +43,11 @@ export default function Settings() {
         },
         () => {
           // Upload completed successfully, now we can get the download URL
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            setPreview(downloadURL)
-            console.log("File available at", downloadURL);
+          getDownloadURL(uploadTask.snapshot.ref).then((userPhotoURL) => {
+            setPreview((userData) => ({
+              ...userData,
+              userPhoto: userPhotoURL,
+            }));
           });
         }
       );
@@ -53,18 +58,46 @@ export default function Settings() {
     setFile(document.querySelector(".settings__input-file").files[0]);
   }
 
+  function handleInput(event) {
+    setPreview((userData) => ({
+      ...userData,
+      userNickname: event.target.value || "GoodLearner7",
+    }));
+  }
   return (
     <main className="main">
       <div className="main__settings settings">
         <div className="settings__user">
           <h2 className="settings__user-title">
-            Choose profile photo and wirte your name
+            Choose profile photo and wirte your nickname
           </h2>
+          <div className="settings__preview">
+            <h3 className="settings__preview-title">Preview</h3>
+            <div className="settings__preview-block">
+            {preview.userPhoto ? (
+              <img
+                className="settings__preview-photo"
+                src={preview.userPhoto}
+                alt="user"
+              />
+            ) : (
+              <i className="material-icons settings__preview-photo settings__preview-photo--default">
+                person_outline
+              </i>
+            )}
+            <p className="settings__preview-name">{preview.userNickname}</p>
+            </div>
+          </div>
           <div className="settings__user-data">
             <label htmlFor="userName" className="settings__user-name">
-              Write your name here
+              Write your nickname here
             </label>
-            <input type="text" className="settings__input" id="userName" />
+            <input
+              type="text"
+              className="settings__input"
+              id="userName"
+              onChange={handleInput}
+            />
           </div>
           <div className="settings__input-wrapper">
             <input
@@ -83,10 +116,8 @@ export default function Settings() {
               </span>
               <span className="settings__input-text">Choose file</span>
             </label>
-            <div className="settings__img-preview"></div>
           </div>
-          <p>{downloadProgress}</p>
-          <img className="profile__user-photo" src={preview} alt="user"/>
+          <p className="settings__download-progress">{downloadProgress}</p>
         </div>
       </div>
     </main>
