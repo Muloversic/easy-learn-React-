@@ -5,7 +5,7 @@ import NewSetInfo from "./NewSetInfo";
 import { getDatabase, ref, set } from "firebase/database";
 import { Link } from "react-router-dom";
 
-export default function NewSet(props) {
+export default function NewSet({ user }) {
   const [wordsData, setWordsData] = useState([]);
   const [collectionInfo, setCollectionInfo] = useState([]);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -73,8 +73,9 @@ export default function NewSet(props) {
     console.log(collectionInfo);
     console.log(data);
     const db = getDatabase();
+    const user = window.localStorage.getItem("User");
     try {
-      set(ref(db, "sets/" + collectionInfo.setName), {
+      set(ref(db, `UsersList/${user}/sets/${collectionInfo.setName}`), {
         description: collectionInfo.setInfo,
         setName: collectionInfo.setName,
         data,

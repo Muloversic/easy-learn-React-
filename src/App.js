@@ -4,7 +4,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-
+import { getDatabase, ref, set } from "firebase/database";
 import "./scss/index.scss";
 import Header from "./components/Header";
 import Settings from "./components/Settings";
@@ -36,7 +36,6 @@ function App() {
   const app = initializeApp(firebaseConfig);
   const [collectionData, setCollectionData] = useState();
   const [wordsToLearn, setWordsToLearn] = useState();
-
   const [studyPresets, setStudyPresets] = useState(false);
   const subLinks = [
     {
@@ -95,14 +94,14 @@ function App() {
       <Router>
         <Header links={links} subLinks={subLinks} />
         <Routes>
-          <Route path="/" element={<Welcome/>}/>
+          <Route path="/" element={<Welcome />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/profile" element={<Profile />} />
           <Route
             path="/sets"
             element={<Sets setCollectionData={setCollectionData} />}
           />
-          <Route path="/new-set" element={<NewSet />} />
+          <Route path="/new-set" element={<NewSet  />} />
           <Route
             path="/open-set"
             element={
@@ -111,7 +110,6 @@ function App() {
                   collectionData={collectionData}
                   setWordsToLearn={setWordsToLearn}
                   setStudyPresets={setStudyPresets}
-                
                 />
               ) : (
                 <Navigate replace to="/sets" />
@@ -120,10 +118,12 @@ function App() {
           />
           <Route
             path="/learning"
-          
             element={
               collectionData ? (
-                <StudySet wordsToLearn={wordsToLearn}   studyPresets={studyPresets}/>
+                <StudySet
+                  wordsToLearn={wordsToLearn}
+                  studyPresets={studyPresets}
+                />
               ) : (
                 <Navigate replace to="/sets" />
               )

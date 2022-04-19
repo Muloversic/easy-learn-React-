@@ -3,8 +3,20 @@ export default function Profile() {
     <main className="main">
       <div className="main__profile profile">
         <div className="profile__user">
-          <img className="profile__user-photo" src="../images/IMG_20220403_103746.jpg" alt="user" />
-          <p className="profile__user-name">Oleh Nikulin</p>
+          {window.localStorage.getItem("UserPhoto") !== null ? (
+            <img
+              className="settings__preview-photo"
+              src={window.localStorage.getItem("UserPhoto")}
+              alt="user"
+            />
+          ) : (
+            <i className="material-icons settings__preview-photo settings__preview-photo--default">
+              person_outline
+            </i>
+          )}
+          <p className="profile__user-name">
+            {window.localStorage.getItem("User") || "GoodLearner7"}
+          </p>
         </div>
         <div className="profile__statistic">
           <h2 className="profile__statistic-title">Your statistics</h2>

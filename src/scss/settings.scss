@@ -12,8 +12,8 @@
     &__preview {
         display: flex;
         flex-direction: column;
-  
-        &-title{
+
+        &-title {
             color: $white;
             font-size: 1.25rem;
             margin-top: 10px;
@@ -46,8 +46,15 @@
             font-size: 1.2em;
             border-bottom: 1px solid $white;
             padding-bottom: 5px;
-            span{
-                font-size: 0.7em;
+        }
+
+        &-info {
+            font-size: 0.7em;
+            &--warning {
+                color: $warning;
+            }
+            &--danger {
+                color: $danger;
             }
         }
 

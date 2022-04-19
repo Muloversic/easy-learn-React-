@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 export default function Sets({ setCollectionData }) {
   const db = getDatabase();
-  const sets = ref(db, "sets/");
+  const sets = ref(
+    db,
+    `UsersList/${window.localStorage.getItem("User")}/sets/`
+  );
   const [data, setData] = useState();
-
   useEffect(() => {
     onValue(sets, (snapshot) => {
       const data = snapshot.val();

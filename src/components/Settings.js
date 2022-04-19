@@ -1,21 +1,30 @@
 import {
   getStorage,
-  ref,
+  ref as ref_storage,
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
+
+import {
+  getDatabase,
+  ref as ref_database,
+  onValue,
+  set,
+} from "firebase/database";
+
 import { useState, useEffect } from "react";
 
 export default function Settings() {
   const [file, setFile] = useState("");
   const [downloadProgress, setDownloadProgress] = useState("");
   const [preview, setPreview] = useState({
-    userNickname: "GoodLearner7",
-    userPhoto: "",
+    userNickname: window.localStorage.getItem("User") || "GoodLearner7",
+    userPhoto: window.localStorage.getItem("UserPhoto") || "",
   });
+
   useEffect(() => {
     const storage = getStorage();
-    const storageRef = ref(storage, "user-photo");
+    const storageRef = ref_storage(storage, "user-photo");
     if (file !== "") {
       const uploadTask = uploadBytesResumable(storageRef, file);
       uploadTask.on(
@@ -44,6 +53,10 @@ export default function Settings() {
         () => {
           // Upload completed successfully, now we can get the download URL
           getDownloadURL(uploadTask.snapshot.ref).then((userPhotoURL) => {
+            if (preview.userPhoto === "") {
+              localStorage.setItem("UserPhoto", userPhotoURL);
+            }
+
             setPreview((userData) => ({
               ...userData,
               userPhoto: userPhotoURL,
@@ -53,6 +66,25 @@ export default function Settings() {
       );
     }
   }, [file]);
+
+  useEffect(() => {
+    const db = getDatabase();
+    const localStorage = window.localStorage;
+    if (preview.userNickname !== "GoodLearner7") {
+      localStorage.setItem("User", preview.userNickname);
+    }
+  }, [preview.userNickname]);
+
+  useEffect(() => {
+    const db = getDatabase();
+    const localStorage = window.localStorage;
+    // if local storage is empty - set new user to db
+    if (localStorage.getItem("User") !== null) {
+      set(ref_database(db, `/UsersList/${localStorage.getItem("User")}`), {
+        sets: "",
+      });
+    }
+  }, []);
 
   function handleFiles(event) {
     setFile(document.querySelector(".settings__input-file").files[0]);
@@ -64,6 +96,7 @@ export default function Settings() {
       userNickname: event.target.value || "GoodLearner7",
     }));
   }
+
   return (
     <main className="main">
       <div className="main__settings settings">
@@ -71,23 +104,29 @@ export default function Settings() {
           <h2 className="settings__user-title">
             Choose profile photo and wirte your nickname
             <br />
-            <span> *all changes are automatically saved</span>
+            <span className="settings__user-info settings__user-info--warning">
+              *all changes are automatically saved
+            </span>
+            <br />
+            <span className="settings__user-info settings__user-info--danger">
+              **WARNING! Editing nickname will delete your sets
+            </span>
           </h2>
           <div className="settings__preview">
             <h3 className="settings__preview-title">Preview</h3>
             <div className="settings__preview-block">
-            {preview.userPhoto ? (
-              <img
-                className="settings__preview-photo"
-                src={preview.userPhoto}
-                alt="user"
-              />
-            ) : (
-              <i className="material-icons settings__preview-photo settings__preview-photo--default">
-                person_outline
-              </i>
-            )}
-            <p className="settings__preview-name">{preview.userNickname}</p>
+              {preview.userPhoto ? (
+                <img
+                  className="settings__preview-photo"
+                  src={preview.userPhoto}
+                  alt="user"
+                />
+              ) : (
+                <i className="material-icons settings__preview-photo settings__preview-photo--default">
+                  person_outline
+                </i>
+              )}
+              <p className="settings__preview-name">{preview.userNickname}</p>
             </div>
           </div>
           <div className="settings__user-data">
