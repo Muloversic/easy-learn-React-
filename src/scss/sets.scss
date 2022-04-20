@@ -4,6 +4,22 @@
     flex-wrap: wrap;
     justify-content: space-around;
     margin-top: 50px;
+    &__empty{
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+    }
+    &__suggest{
+        color: $white;
+        margin-bottom: 10px;
+    }
+    &__button-create{
+        font-size: 1.05rem;
+        background-color: $primary;
+        border: 1px solid $white;
+        color: $white;
+        padding: 10px 15px;
+    }
     &__item {
         display: flex;
         flex-direction: column;
