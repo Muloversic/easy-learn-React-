@@ -56,9 +56,6 @@ export default function Settings() {
           // Upload completed successfully, now we can get the download URL
           getDownloadURL(uploadTask.snapshot.ref).then((userPhotoURL) => {
             localStorage.setItem("UserPhoto", userPhotoURL);
-            if (preview.userPhoto === "") {
-            }
-
             setPreview((userData) => ({
               ...userData,
               userPhoto: userPhotoURL,
