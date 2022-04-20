@@ -25,7 +25,8 @@ export default function Settings() {
 
   useEffect(() => {
     const storage = getStorage();
-    const storageRef = ref_storage(storage, "user-photo");
+    const currentUser = localStorage.getItem("User");
+    const storageRef = ref_storage(storage, `${currentUser}`);
     if (file !== "") {
       const uploadTask = uploadBytesResumable(storageRef, file);
       uploadTask.on(
@@ -54,8 +55,8 @@ export default function Settings() {
         () => {
           // Upload completed successfully, now we can get the download URL
           getDownloadURL(uploadTask.snapshot.ref).then((userPhotoURL) => {
+            localStorage.setItem("UserPhoto", userPhotoURL);
             if (preview.userPhoto === "") {
-              localStorage.setItem("UserPhoto", userPhotoURL);
             }
 
             setPreview((userData) => ({
@@ -73,6 +74,22 @@ export default function Settings() {
     if (preview.userNickname !== "GoodLearner7") {
       localStorage.setItem("User", preview.userNickname);
     }
+
+    const db = getDatabase();
+    const users = ref_database(db, `UsersList/`);
+    onValue(users, (snapshot) => {
+      const data = snapshot.val();
+      const currentUser = localStorage.getItem("User");
+      for (let userNickname in data) {
+        if (userNickname === currentUser) {
+          localStorage.setItem("UserPhoto", data[userNickname].userPhotoURL);
+          setPreview((userData) => ({
+            ...userData,
+            userPhoto: data[userNickname].userPhotoURL,
+          }));
+        }
+      }
+    });
   }, [preview.userNickname]);
 
   useEffect(() => {
@@ -93,6 +110,7 @@ export default function Settings() {
         console.log("new user was created");
         set(ref_database(db, `/UsersList/${currentUser}`), {
           sets: "",
+          userPhotoURL: preview.userPhoto,
         });
       }
     });

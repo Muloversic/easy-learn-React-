@@ -3,7 +3,7 @@ export default function Profile() {
     <main className="main">
       <div className="main__profile profile">
         <div className="profile__user">
-          {window.localStorage.getItem("UserPhoto") !== null ? (
+          {window.localStorage.getItem("UserPhoto") !== "" ? (
             <img
               className="settings__preview-photo"
               src={window.localStorage.getItem("UserPhoto")}
