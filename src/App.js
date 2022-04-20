@@ -3,6 +3,7 @@ import {
   Routes,
   Route,
   Navigate,
+  useNavigate,
 } from "react-router-dom";
 import { getDatabase, ref, set } from "firebase/database";
 import "./scss/index.scss";
@@ -16,7 +17,7 @@ import Welcome from "./components/Welcome";
 import Profile from "./components/Profile";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -85,60 +86,72 @@ function App() {
         learning: {
           subValue: "learning",
         },
+        ['']: {
+          subValue: "Welcome",
+        },
       },
     },
   ];
 
+  let navigateUser = useNavigate();
+  useEffect(() => {
+    const currentUser = localStorage.getItem("User");
+    if (!currentUser) {
+      navigateUser("/");
+    }
+  }, []);
+
+  // console.log(currentUser);
+
   return (
     <div className="App">
-      <Router>
-        <Header links={links} subLinks={subLinks} />
-        <Routes>
-          <Route path="/" element={<Welcome />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route
-            path="/sets"
-            element={<Sets setCollectionData={setCollectionData} />}
-          />
-          <Route path="/new-set" element={<NewSet  />} />
-          <Route
-            path="/open-set"
-            element={
-              collectionData ? (
-                <OpenSet
-                  collectionData={collectionData}
-                  setWordsToLearn={setWordsToLearn}
-                  setStudyPresets={setStudyPresets}
-                />
-              ) : (
-                <Navigate replace to="/sets" />
-              )
-            }
-          />
-          <Route
-            path="/learning"
-            element={
-              collectionData ? (
-                <StudySet
-                  wordsToLearn={wordsToLearn}
-                  studyPresets={studyPresets}
-                />
-              ) : (
-                <Navigate replace to="/sets" />
-              )
-            }
-          />
-          <Route
-            path="*"
-            element={
-              <main style={{ padding: "1rem" }}>
-                <p>There's nothing here!</p>
-              </main>
-            }
-          />
-        </Routes>
-      </Router>
+      <Header links={links} subLinks={subLinks} />
+      <Routes>
+        <Route path="/" element={<Welcome />} />
+        <Route path="/settings" element={<Settings />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/sets"
+          element={<Sets setCollectionData={setCollectionData} />}
+        />
+        <Route path="/new-set" element={<NewSet />} />
+        <Route
+          path="/open-set"
+          element={
+            collectionData ? (
+              <OpenSet
+                collectionData={collectionData}
+                setWordsToLearn={setWordsToLearn}
+                setStudyPresets={setStudyPresets}
+              />
+            ) : (
+              <Navigate replace to="/sets" />
+            )
+          }
+        />
+        <Route
+          path="/learning"
+          element={
+            collectionData ? (
+              <StudySet
+                wordsToLearn={wordsToLearn}
+                studyPresets={studyPresets}
+              />
+            ) : (
+              <Navigate replace to="/sets" />
+            )
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <main style={{ padding: "1rem" }}>
+              <p>There's nothing here!</p>
+            </main>
+          }
+        />
+        )
+      </Routes>
     </div>
   );
 }
