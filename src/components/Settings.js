@@ -10,6 +10,7 @@ import {
   ref as ref_database,
   onValue,
   set,
+  update,
 } from "firebase/database";
 
 import { useState, useEffect } from "react";
@@ -68,7 +69,6 @@ export default function Settings() {
   }, [file]);
 
   useEffect(() => {
-    const db = getDatabase();
     const localStorage = window.localStorage;
     if (preview.userNickname !== "GoodLearner7") {
       localStorage.setItem("User", preview.userNickname);
@@ -76,14 +76,26 @@ export default function Settings() {
   }, [preview.userNickname]);
 
   useEffect(() => {
+    // get array of users from db
     const db = getDatabase();
     const localStorage = window.localStorage;
-    // if local storage is empty - set new user to db
-    if (localStorage.getItem("User") !== null) {
-      set(ref_database(db, `/UsersList/${localStorage.getItem("User")}`), {
-        sets: "",
-      });
-    }
+    const users = ref_database(db, `UsersList/`);
+    const usersArray = [];
+    onValue(users, (snapshot) => {
+      const data = snapshot.val();
+      for (let userNickname in data) {
+        usersArray.push(userNickname);
+      }
+
+      const currentUser = localStorage.getItem("User");
+      // if user from LS doesn't match with db users - create new user
+      if (!usersArray.includes(currentUser)) {
+        console.log("new user was created");
+        set(ref_database(db, `/UsersList/${currentUser}`), {
+          sets: "",
+        });
+      }
+    });
   }, []);
 
   function handleFiles(event) {
@@ -109,7 +121,8 @@ export default function Settings() {
             </span>
             <br />
             <span className="settings__user-info settings__user-info--danger">
-              **WARNING! Editing nickname will delete your sets
+              **WARNING! Editing nickname will create new user, to see previous
+              sets change back your nickname
             </span>
           </h2>
           <div className="settings__preview">
