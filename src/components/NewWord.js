@@ -9,7 +9,7 @@ export default function NewWord(props) {
     props.setWordsData((prevData) => {
       return {
         ...prevData,
-        [nanoid()]: inputData,
+        ["id" + nanoid()]: inputData,
       };
     });
   }, [inputData]);
@@ -39,7 +39,7 @@ export default function NewWord(props) {
       };
     });
   }
-  
+
   function getData(target, id) {
     if (target.name === "Term") {
       setInputData((prevData) => {

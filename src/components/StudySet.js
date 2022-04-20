@@ -242,8 +242,9 @@ export default function StudySet({ wordsToLearn, studyPresets }) {
   useEffect(() => {
     // update db when user click "Submit answer"
     const db = getDatabase();
+     const currentUser = localStorage.getItem("User");
     const updates = {};
-    updates["/sets/" + wordsToLearn.setName] = wordsToLearn;
+    updates[`UsersList/${currentUser}/sets/` + wordsToLearn.setName] = wordsToLearn;
     update(ref(db), updates);
   }, [isWordsToDb]);
 

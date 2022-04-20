@@ -13,7 +13,7 @@ export default function NewSet({ user }) {
   const [newWordElement, setNewWordElement] = useState([
     <NewWord
       key={nanoid()}
-      id={nanoid()}
+      id={"id" + nanoid()}
       removeWord={removeWord}
       setWordsData={setWordsData}
     />,
