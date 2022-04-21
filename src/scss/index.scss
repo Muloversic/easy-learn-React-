@@ -8,7 +8,6 @@
 @import url(settings.scss);
 @import url(welcome.scss);
 
-
 $base-color: #191a35;
 body {
     background-color: $base-color;
@@ -17,7 +16,27 @@ body {
     box-sizing: border-box;
 }
 
-main{
+.main {
     margin-top: 45px;
     padding: 0 10px;
+}
+
+@media (min-width: 768px) {
+    .main {
+        padding: 0 120px;
+    }
+}
+@media (min-width: 1024px) {
+    .main {
+        padding: 0 220px;
+    }
+
+    .main__container {
+        padding: 0 80px;
+    }
+}
+@media (min-width: 1440px) {
+    .main__container {
+        padding: 0 220px;
+    }
 }

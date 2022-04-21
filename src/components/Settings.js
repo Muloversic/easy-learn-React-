@@ -126,67 +126,69 @@ export default function Settings() {
 
   return (
     <main className="main">
-      <div className="main__settings settings">
-        <div className="settings__user">
-          <h2 className="settings__user-title">
-            Choose profile photo and wirte your nickname
-            <br />
-            <span className="settings__user-info settings__user-info--warning">
-              *all changes are automatically saved
-            </span>
-            <br />
-            <span className="settings__user-info settings__user-info--danger">
-              **WARNING! Editing nickname will create new user, to see previous
-              sets change back your nickname
-            </span>
-          </h2>
-          <div className="settings__preview">
-            <h3 className="settings__preview-title">Preview</h3>
-            <div className="settings__preview-block">
-              {preview.userPhoto ? (
-                <img
-                  className="settings__preview-photo"
-                  src={preview.userPhoto}
-                  alt="user"
-                />
-              ) : (
-                <i className="material-icons settings__preview-photo settings__preview-photo--default">
-                  person_outline
-                </i>
-              )}
-              <p className="settings__preview-name">{preview.userNickname}</p>
-            </div>
-          </div>
-          <div className="settings__user-data">
-            <label htmlFor="userName" className="settings__user-name">
-              Write your nickname here
-            </label>
-            <input
-              type="text"
-              className="settings__input"
-              id="userName"
-              onChange={handleInput}
-            />
-          </div>
-          <div className="settings__input-wrapper">
-            <input
-              name="file"
-              type="file"
-              id="input__file"
-              className="settings__input-file"
-              accept="image/*"
-              onChange={handleFiles}
-            />
-            <label htmlFor="input__file" className="settings__input-button">
-              <span className="settings__icon-wrapper">
-                <i className="settings__icon-file Small material-icons">
-                  arrow_downward
-                </i>
+      <div className="main__container">
+        <div className="main__settings settings">
+          <div className="settings__user">
+            <h2 className="settings__user-title">
+              Choose profile photo and wirte your nickname
+              <br />
+              <span className="settings__user-info settings__user-info--warning">
+                *all changes are automatically saved
               </span>
-              <span className="settings__input-text">Choose file</span>
-            </label>
+              <br />
+              <span className="settings__user-info settings__user-info--danger">
+                **WARNING! Editing nickname will create new user, to see
+                previous sets change back your nickname
+              </span>
+            </h2>
+            <div className="settings__preview">
+              <h3 className="settings__preview-title">Preview</h3>
+              <div className="settings__preview-block">
+                {preview.userPhoto ? (
+                  <img
+                    className="settings__preview-photo"
+                    src={preview.userPhoto}
+                    alt="user"
+                  />
+                ) : (
+                  <i className="material-icons settings__preview-photo settings__preview-photo--default">
+                    person_outline
+                  </i>
+                )}
+                <p className="settings__preview-name">{preview.userNickname}</p>
+              </div>
+            </div>
+            <div className="settings__user-data">
+              <label htmlFor="userName" className="settings__user-name">
+                Write your nickname here
+              </label>
+              <input
+                type="text"
+                className="settings__input"
+                id="userName"
+                onChange={handleInput}
+              />
+            </div>
+            <div className="settings__input-wrapper">
+              <input
+                name="file"
+                type="file"
+                id="input__file"
+                className="settings__input-file"
+                accept="image/*"
+                onChange={handleFiles}
+              />
+              <label htmlFor="input__file" className="settings__input-button">
+                <span className="settings__icon-wrapper">
+                  <i className="settings__icon-file Small material-icons">
+                    arrow_downward
+                  </i>
+                </span>
+                <span className="settings__input-text">Choose file</span>
+              </label>
+            </div>
+            <p className="settings__download-progress">{downloadProgress}</p>
           </div>
-          <p className="settings__download-progress">{downloadProgress}</p>
         </div>
       </div>
     </main>

@@ -35,7 +35,7 @@ export default function NewSet({ user }) {
       ...prevState,
       <NewWord
         key={nanoid()}
-        id={'id' + nanoid()}
+        id={"id" + nanoid()}
         removeWord={removeWord}
         setWordsData={setWordsData}
       />,
@@ -70,7 +70,7 @@ export default function NewSet({ user }) {
 
   function createSet(event) {
     event.preventDefault();
-    setIsCreateSet(true)
+    setIsCreateSet(true);
   }
 
   useEffect(() => {
@@ -94,25 +94,32 @@ export default function NewSet({ user }) {
   }, [isCreateSet]);
 
   return (
-    <main className="main main-new_set new-set">
-      <form className="new-set__form form">
-        <NewSetInfo setCollectionInfo={setCollectionInfo} />
-        <div className="form__words">
-          {newWordElement}
-          <button onClick={addWord} className="material-icons form__button-add">
-            add_circle_outline
-          </button>
-          <button onClick={createSet} className="form__button-create">
-            {isSuccess ? "Go to sets" : "Create new set"}
-            {isSuccess && <Link to="/sets" className="form__link"></Link>}
-          </button>
+    <main className="main">
+      <div className="main__container">
+        <div className="main__new new-set">
+          <form className="new-set__form form">
+            <NewSetInfo setCollectionInfo={setCollectionInfo} />
+            <div className="form__words">
+              {newWordElement}
+              <button
+                onClick={addWord}
+                className="material-icons form__button-add"
+              >
+                add_circle_outline
+              </button>
+              <button onClick={createSet} className="form__button-create">
+                {isSuccess ? "Go to sets" : "Create new set"}
+                {isSuccess && <Link to="/sets" className="form__link"></Link>}
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
-      {isShowAlert && (
-        <div className="new-set__error">
-          <p className="new-set__error-message">An error occured!</p>
-        </div>
-      )}
+        {isShowAlert && (
+          <div className="new-set__error">
+            <p className="new-set__error-message">An error occured!</p>
+          </div>
+        )}
+      </div>
     </main>
   );
 }
