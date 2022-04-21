@@ -1,5 +1,6 @@
 @import "./variables.scss";
 @import "./keyframes.scss";
+@import "./mixins.scss";
 .new-set{
     position: relative;
     &__error{
@@ -100,6 +101,10 @@
             color: $white;
             margin-top: 10px;
             width: 50px;
+            cursor: pointer;
+            &:hover{
+                color: $learningWordTransp;
+            }
         }
         &-remove {
             background-color: transparent;
@@ -110,6 +115,7 @@
             top: 3%;
             font-size: 1em;
             right: -4%;
+            cursor: pointer;
         }
         &-create {
             background-color: transparent;
@@ -119,6 +125,8 @@
             text-align: center;
             margin: 10px 0;
             padding: 10px 25px;
+            cursor: pointer;
+            @include hoverAnim($learningWordTransp);
         }
     }
     

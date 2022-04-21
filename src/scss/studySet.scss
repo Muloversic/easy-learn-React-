@@ -1,5 +1,6 @@
 @import "./variables.scss";
 @import "./keyframes.scss";
+@import "./mixins.scss";
 .study {
     margin: 50px 0;
     display: flex;
@@ -51,9 +52,14 @@
         border: 1px solid $white;
         color: $white;
         padding: 10px;
+        position: relative;
+        cursor: pointer;
         &:disabled {
             color: $disabled;
+            @include hoverAnim($dangerDisabled);
         }
+        
+        @include hoverAnim($learningWordTransp);
     }
     &__link {
         color: $white;
