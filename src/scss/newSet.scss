@@ -7,9 +7,9 @@
         bottom: 0;
         right: 50%;
         transform: translate(50%, 0);
-        color: $error;
+        color: $danger;
         background-color: $white;
-        border: 1px solid $error;
+        border: 1px solid $danger;
         padding: 5px;
         &--fade{
             opacity: 1;

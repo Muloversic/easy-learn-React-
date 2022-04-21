@@ -113,12 +113,12 @@ export default function NewSet({ user }) {
               </button>
             </div>
           </form>
+          {isShowAlert && (
+            <div className="new-set__error">
+              <p className="new-set__error-message">An error occured!</p>
+            </div>
+          )}
         </div>
-        {isShowAlert && (
-          <div className="new-set__error">
-            <p className="new-set__error-message">An error occured!</p>
-          </div>
-        )}
       </div>
     </main>
   );

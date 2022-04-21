@@ -7,8 +7,8 @@
 @import url(profile.scss);
 @import url(settings.scss);
 @import url(welcome.scss);
+@import "./variables.scss";
 
-$base-color: #191a35;
 body {
     background-color: $base-color;
 }
