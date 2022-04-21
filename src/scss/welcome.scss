@@ -1,24 +1,78 @@
 @import "./variables.scss";
-.welcome{
-    &__title{
+.welcome {
+    &__title {
         color: $white;
         font-size: 1.25rem;
         text-align: center;
     }
 
-    &__list{
+    &__list {
+        &-wrap {
+            display: flex;
+            transform: rotateY(0deg);
+            transition: all 1s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform-style: preserve-3d;
+        }
         margin-top: 15px;
-        &-item{
-            a{
+        &-item {
+            a {
                 color: $white;
                 text-decoration: none;
             }
-            font-size: 1.1rem;
-            margin-bottom: 10px;
+            width: 800px;
+            position: relative;
+            z-index: 2;
+            color: #999;
+            font-size: 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+            transform-style: preserve-3d;
+            transform: rotateY(0deg);
+            transition: all 3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            &:hover .welcome__list-wrap {
+                transform: rotateY(-45deg);
+                cursor: pointer;
+            }
+            &:hover {
+                z-index: 1;
+            }
+            &:hover .welcome__list-decor--left {
+                &:before {
+                    width: 55%;
+                }
+            }
+
+            .welcome__list-decor--left {
+                width: 400px;
+                padding: 15px 20px;
+                text-align: right;
+
+                transform-style: preserve-3d;
+                transform: rotateY(0deg);
+                &:before {
+                    content: "";
+                    position: absolute;
+                    display: block;
+                    top: 0;
+                    left: 0;
+                    width: 50%;
+                    height: 100%;
+                    transition: width 1s ease-in-out;
+                }
+            }
+            .welcome__list-decor--right {
+                width: 400px;
+                padding: 15px 20px;
+                text-align: left;
+                transform: rotateY(90deg);
+                transform-origin: left center;
+                transform-style: preserve-3d;
+                backface-visibility: hidden;
+            }
         }
     }
-   
-    &__button{
+
+    &__button {
         position: absolute;
         top: 50%;
         left: 50%;

@@ -17,18 +17,39 @@ export default function Welcome() {
             <h1 className="welcome__title">Welcome to Easy Learn app!</h1>
             <ul className="welcome__list">
               <li className="welcome__list-item">
-                <Link to="/settings">You can visit the settings page here</Link>
+                <div className="welcome__list-wrap">
+                  <div className="welcome__list-decor welcome__list-decor--left">
+                    <Link to="/settings">You can visit the settings page</Link>
+                  </div>
+                  <div className="welcome__list-decor welcome__list-decor--right">
+                    <Link to="/settings">here</Link>
+                  </div>
+                </div>
               </li>
               <li className="welcome__list-item">
-                <Link to="/sets">
-                  You can visit the sets page and create new set or learn that
-                  you have here
-                </Link>
+                <div className="welcome__list-wrap">
+                  <div className="welcome__list-decor welcome__list-decor--left">
+                    <Link to="/sets">
+                      You can visit the sets page and create new set or learn
+                      that you have
+                    </Link>
+                  </div>
+                  <div className="welcome__list-decor welcome__list-decor--right">
+                    <Link to="/sets">here</Link>
+                  </div>
+                </div>
               </li>
               <li className="welcome__list-item">
-                <Link to="/profile">
-                  You can visit the your profile page here
-                </Link>
+                <div className="welcome__list-wrap">
+                  <div className="welcome__list-decor welcome__list-decor--left">
+                    <Link to="/profile">
+                      You can visit the your profile page
+                    </Link>
+                  </div>
+                  <div className="welcome__list-decor welcome__list-decor--right">
+                    <Link to="/profile">here</Link>
+                  </div>
+                </div>
               </li>
             </ul>
           </div>
