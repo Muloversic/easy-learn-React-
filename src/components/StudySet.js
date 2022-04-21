@@ -250,23 +250,27 @@ export default function StudySet({ wordsToLearn, studyPresets }) {
   }, [isWordsToDb]);
 
   return (
-    <main>
-      <form className="study">
-        <div className="study__elements">
-          {rightAnswersToDisplay}
-          <StudySetPresets
-            wordsToLearn={wordsToLearn}
-            wordOrder={wordOrder}
-            getData={getData}
-            studyPresets={studyPresets}
-            checkAnswers={checkAnswers}
-            nextWord={nextWord}
-          />
+    <main className="main">
+      <div className="main__container">
+        <div className="main__study study">
+          <form className="study__form">
+            <div className="study__elements">
+              {rightAnswersToDisplay}
+              <StudySetPresets
+                wordsToLearn={wordsToLearn}
+                wordOrder={wordOrder}
+                getData={getData}
+                studyPresets={studyPresets}
+                checkAnswers={checkAnswers}
+                nextWord={nextWord}
+              />
+              <Link to="/open-set" className="study__link">
+                Go back to set
+              </Link>
+            </div>
+          </form>
         </div>
-        <Link to="/open-set" className="study__link">
-          Go back to set
-        </Link>
-      </form>
+      </div>
     </main>
   );
 }
