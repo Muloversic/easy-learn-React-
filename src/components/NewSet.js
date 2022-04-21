@@ -91,6 +91,7 @@ export default function NewSet({ user }) {
         setIsShowAlert(true);
       }
     }
+    return () => setIsCreateSet(false);
   }, [isCreateSet]);
 
   return (
