@@ -28,7 +28,7 @@ export default function Profile() {
           }
         }
       }
-      allWordsProgress = allWordsProgress / words;
+      allWordsProgress = (allWordsProgress / words).toFixed(2);
       setStats({
         words: words,
         learnedWords: learnedWords,
@@ -38,7 +38,7 @@ export default function Profile() {
       return () => null;
     });
   }, []);
-  
+
   return (
     <main className="main">
       <div className="main__profile profile">
