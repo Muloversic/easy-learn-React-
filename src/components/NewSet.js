@@ -10,6 +10,7 @@ export default function NewSet({ user }) {
   const [collectionInfo, setCollectionInfo] = useState([]);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isShowAlert, setIsShowAlert] = useState(false);
+  const [isCreateSet, setIsCreateSet] = useState(false);
   const [newWordElement, setNewWordElement] = useState([
     <NewWord
       key={nanoid()}
@@ -69,22 +70,28 @@ export default function NewSet({ user }) {
 
   function createSet(event) {
     event.preventDefault();
-    const data = filterWordsData();
-    console.log(collectionInfo);
-    console.log(data);
-    const db = getDatabase();
-    const user = window.localStorage.getItem("User");
-    try {
-      set(ref(db, `UsersList/${user}/sets/${collectionInfo.setName}`), {
-        description: collectionInfo.setInfo,
-        setName: collectionInfo.setName,
-        data,
-      });
-      setIsSuccess(true);
-    } catch (err) {
-      setIsShowAlert(true);
-    }
+    setIsCreateSet(true)
   }
+
+  useEffect(() => {
+    if (isCreateSet) {
+      const data = filterWordsData();
+      console.log(collectionInfo);
+      console.log(data);
+      const db = getDatabase();
+      const user = window.localStorage.getItem("User");
+      try {
+        set(ref(db, `UsersList/${user}/sets/${collectionInfo.setName}`), {
+          description: collectionInfo.setInfo,
+          setName: collectionInfo.setName,
+          data,
+        });
+        setIsSuccess(true);
+      } catch (err) {
+        setIsShowAlert(true);
+      }
+    }
+  }, [isCreateSet]);
 
   return (
     <main className="main main-new_set new-set">
