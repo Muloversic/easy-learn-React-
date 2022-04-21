@@ -187,7 +187,7 @@ export default function StudySet({ wordsToLearn, studyPresets }) {
           }
 
           return (
-            <div className="study__result">
+            <div className="study__result" key={answer.id}>
               <h4 className="study__word-heading">Right answer for:</h4>
               <span className="study__word-studying"> {answer.word}</span>
               <span className="study__word-hint">{hint}</span>
@@ -242,9 +242,10 @@ export default function StudySet({ wordsToLearn, studyPresets }) {
   useEffect(() => {
     // update db when user click "Submit answer"
     const db = getDatabase();
-     const currentUser = localStorage.getItem("User");
+    const currentUser = localStorage.getItem("User");
     const updates = {};
-    updates[`UsersList/${currentUser}/sets/` + wordsToLearn.setName] = wordsToLearn;
+    updates[`UsersList/${currentUser}/sets/` + wordsToLearn.setName] =
+      wordsToLearn;
     update(ref(db), updates);
   }, [isWordsToDb]);
 

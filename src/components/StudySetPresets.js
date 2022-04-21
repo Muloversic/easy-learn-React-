@@ -6,7 +6,6 @@ export default function StudySetPresets({
   checkAnswers,
   nextWord,
 }) {
-
   // Option 1
   const wordsAllElements = wordsToLearn.data.map((word) => {
     if (word.progress !== 100) {
@@ -32,10 +31,10 @@ export default function StudySetPresets({
   function renderWordBody(word) {
     let isExtraTranslation = false;
     return (
-      <div className="study__word">
+      <div className="study__word" key={word.id}>
         <label className="study__word-label">{word.word}</label>
         <input
-          id= {word.id}
+          id={word.id}
           type="text"
           name="Determination"
           className="study__word-input"
