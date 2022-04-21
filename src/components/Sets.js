@@ -51,20 +51,26 @@ export default function Sets({ setCollectionData }) {
   });
 
   return (
-    <main className="sets">
-      {dataArray.length === 0 ? (
-        <div className="sets__empty">
-          <p className="sets__suggest">Your don't have any sets. Create one.</p>
-          <button
-            className="sets__button-create"
-            onClick={() => navigate("/new-set")}
-          >
-            Create set
-          </button>
+    <main className="main">
+      <div className="main__container">
+        <div className="sets__sets sets">
+          {dataArray.length === 0 ? (
+            <div className="sets__empty">
+              <p className="sets__suggest">
+                Your don't have any sets. Create one.
+              </p>
+              <button
+                className="sets__button-create"
+                onClick={() => navigate("/new-set")}
+              >
+                Create set
+              </button>
+            </div>
+          ) : (
+            setElement
+          )}
         </div>
-      ) : (
-        setElement
-      )}
+      </div>
     </main>
   );
 }
