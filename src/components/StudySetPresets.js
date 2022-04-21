@@ -24,7 +24,7 @@ export default function StudySetPresets({
     } else if (wordOrder === arr.length && i === arr.length - 1) {
       buttonNext.setAttribute("disabled", "");
       buttonSubmit.setAttribute("disabled", "");
-      return <p className="study__word-done">You're done!</p>;
+      return <p key={word.id} className="study__word-done">You're done!</p>;
     }
   });
 
