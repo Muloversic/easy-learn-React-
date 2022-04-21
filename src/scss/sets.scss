@@ -32,7 +32,16 @@
         padding: 10px 15px;
         margin: 10px 0;
         width: 170px;
+        overflow-wrap: break-word;
         cursor: pointer;
+        @media (min-width: 1024px) {
+            width: 220px;
+        }
+        
+        @media (min-width: 1440px) {
+            width: 280px;
+        }
+
         &-info {
             margin-bottom: 5px;
             &:first-child {
