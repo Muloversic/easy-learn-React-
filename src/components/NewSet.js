@@ -35,7 +35,7 @@ export default function NewSet({ user }) {
       ...prevState,
       <NewWord
         key={nanoid()}
-        id={nanoid()}
+        id={'id' + nanoid()}
         removeWord={removeWord}
         setWordsData={setWordsData}
       />,

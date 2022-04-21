@@ -9,7 +9,7 @@ export default function NewWord(props) {
     props.setWordsData((prevData) => {
       return {
         ...prevData,
-        ["id" + nanoid()]: inputData,
+        [nanoid()]: inputData,
       };
     });
   }, [inputData]);
