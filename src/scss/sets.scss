@@ -22,6 +22,9 @@
         border: 1px solid $white;
         color: $white;
         padding: 10px 15px;
+        position: relative;
+        cursor: pointer;
+        @include hoverAnim($learningWordTransp);
     }
 
     &__item {
