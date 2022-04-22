@@ -31,12 +31,14 @@
             text-transform: capitalize;
             padding: 10px 0 5px 0;
             border-bottom: 1px solid $white;
+            overflow-wrap: break-word;
         }
 
         &-description {
             color: $white;
             padding: 10px 0 5px 0;
             border-bottom: 1px solid $white;
+            overflow-wrap: break-word;
         }
     }
 
@@ -52,8 +54,13 @@
         padding: 7px 7px 35px 7px;
         margin-top: 10px;
         flex-wrap: wrap;
+        width: auto;
+        max-width: 100%;
+        overflow-wrap: break-word;
         &-block {
             flex: 0 1 50%;
+            margin-top: 10px;
+          
             &:first-child {
                 padding-right: 10px;
             }
@@ -63,6 +70,20 @@
             margin: 15px 0 0 0;
             padding-bottom: 5px;
             border-bottom: 1px solid $black;
+            overflow-wrap: break-word;
+            width: 133px;
+            @media (min-width: 440px) {
+                width: 180px;
+            }
+            @media (min-width: 768px) {
+                width: 230px;
+            }
+            @media (min-width: 1024px) {
+                width: 300px;
+            }
+            @media (min-width: 1920px) {
+                width: 500px;
+            }
         }
 
         &-secondary {
@@ -83,9 +104,7 @@
     }
 }
 
-@media (min-width: 1024px) {
-   
-}
+
 @media (min-width: 1440px) {
    
 }
