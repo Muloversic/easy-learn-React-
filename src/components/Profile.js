@@ -28,7 +28,7 @@ export default function Profile() {
           }
         }
       }
-      allWordsProgress = (allWordsProgress / words).toFixed(2);
+      allWordsProgress = +(allWordsProgress / words).toFixed(2) || 0;
       setStats({
         words: words,
         learnedWords: learnedWords,

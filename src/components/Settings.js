@@ -78,7 +78,6 @@ export default function Settings() {
       const currentUser = localStorage.getItem("User");
       for (let userNickname in data) {
         if (userNickname === currentUser) {
-          console.log(data[userNickname].userPhotoURL)
           localStorage.setItem("UserPhoto", data[userNickname].userPhotoURL);
           setPreview((userData) => ({
             ...userData,
