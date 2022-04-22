@@ -100,6 +100,7 @@
         left: 0;
         width: 100%;
         height: 100%;
+        z-index: 2;
     }
 
     &__button {
@@ -126,7 +127,7 @@
             right: -4%;
             cursor: pointer;
         }
-        
+
         &-create {
             background-color: transparent;
             position: relative;
