@@ -19,7 +19,7 @@
                 color: $white;
                 text-decoration: none;
             }
-            // width: 800px;
+
             position: relative;
             z-index: 2;
             color: #999;
@@ -33,6 +33,7 @@
                 transform: rotateY(-45deg);
                 cursor: pointer;
             }
+
             &:hover {
                 z-index: 1;
             }
@@ -46,7 +47,6 @@
                 width: 400px;
                 padding: 15px 20px;
                 text-align: right;
-
                 transform-style: preserve-3d;
                 transform: rotateY(0deg);
                 &:before {
@@ -60,6 +60,7 @@
                     transition: width 1s ease-in-out;
                 }
             }
+            
             .welcome__list-decor--right {
                 width: 400px;
                 padding: 15px 20px;

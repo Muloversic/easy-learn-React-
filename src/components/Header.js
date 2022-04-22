@@ -25,11 +25,10 @@ export default function Header({ links, subLinks }) {
       href = link.href;
       icon = link.icon;
     } else {
-     
       for (let subItem in link.value) {
         if (subItem === page) {
           title = link.value[subItem].subValue;
-          href = link.value[subItem].href || '/';
+          href = link.value[subItem].href || "/";
         }
       }
     }
@@ -57,13 +56,13 @@ export default function Header({ links, subLinks }) {
         navItem.classList.add("navigation__item--active");
         burgerItem.classList.add("navigation__burger--active");
         if (index === 2) {
-          navItem.style.display = 'none';
+          navItem.style.display = "none";
         }
       } else {
         navItem.classList.remove("navigation__item--active");
         burgerItem.classList.remove("navigation__burger--active");
         if (index === 2) {
-          navItem.style.display = 'block';
+          navItem.style.display = "block";
         }
       }
     });

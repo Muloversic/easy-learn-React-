@@ -104,7 +104,6 @@ export default function StudySet({ wordsToLearn, studyPresets }) {
           ...wordsToLearn.data.filter(
             (word) =>
               word.extraTranslation !== userWord.extraTranslation &&
-              // word.translation !== userWord.translation &&
               word.id === userWord.id
           )
         );

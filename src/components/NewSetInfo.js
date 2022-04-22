@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { nanoid } from "nanoid";
-export default function NewSetInfo({ setCollectionInfo, id }) {
+export default function NewSetInfo({ setCollectionInfo }) {
   const [inputData, setInputData] = useState();
   useEffect(() => {
     setCollectionInfo((prevData) => {
@@ -30,7 +29,7 @@ export default function NewSetInfo({ setCollectionInfo, id }) {
       });
     }
   }
-  
+
   return (
     <>
       <label htmlFor="setName" className="form__label">

@@ -8,7 +8,6 @@ export default function Welcome() {
     const currentUser = localStorage.getItem("User");
     setUser(currentUser);
   }, [user]);
-// https://codepen.io/sirnightowl/pen/XWbZjZN
   return (
     <main className="main">
       <div className="main__welcome welcome">

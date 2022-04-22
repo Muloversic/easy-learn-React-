@@ -5,7 +5,7 @@ import NewSetInfo from "./NewSetInfo";
 import { getDatabase, ref, set } from "firebase/database";
 import { Link } from "react-router-dom";
 
-export default function NewSet({ user }) {
+export default function NewSet() {
   const [wordsData, setWordsData] = useState([]);
   const [collectionInfo, setCollectionInfo] = useState([]);
   const [isSuccess, setIsSuccess] = useState(false);

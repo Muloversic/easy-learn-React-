@@ -10,7 +10,6 @@ import {
   ref as ref_database,
   onValue,
   set,
-  update,
 } from "firebase/database";
 
 import { useState, useEffect } from "react";

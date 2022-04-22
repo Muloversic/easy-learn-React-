@@ -9,6 +9,7 @@
         display: flex;
         flex-direction: column;
     }
+
     &__word {
         display: flex;
         flex-direction: column;
@@ -21,10 +22,12 @@
             display: inline-block;
             font-size: 19px;
         }
+
         &-studying {
             color: $learningWord;
             font-size: 19px;
         }
+
         &:first-child {
             margin-top: 0;
         }
@@ -33,21 +36,25 @@
             margin-bottom: 5px;
             overflow-wrap: break-word;
         }
+
         &-hint {
             display: block;
         }
+
         &-done {
             color: $white;
             margin-top: 5px;
             animation: append 1.5s forwards;
         }
     }
+
     &__result {
         color: $white;
         margin-top: 10px;
         animation: append 1.5s forwards;
         overflow-wrap: break-word;
     }
+
     &__button {
         margin-top: 10px;
         background-color: transparent;
@@ -60,9 +67,10 @@
             color: $disabled;
             @include hoverAnim($dangerDisabled);
         }
-        
+
         @include hoverAnim($learningWordTransp);
     }
+
     &__link {
         color: $white;
         text-align: center;

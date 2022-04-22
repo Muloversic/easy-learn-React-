@@ -1,9 +1,9 @@
 @import "./variables.scss";
 @import "./keyframes.scss";
 @import "./mixins.scss";
-.new-set{
+.new-set {
     position: relative;
-    &__error{
+    &__error {
         position: absolute;
         bottom: 0;
         right: 50%;
@@ -12,12 +12,13 @@
         background-color: $white;
         border: 1px solid $danger;
         padding: 5px;
-        &--fade{
+        &--fade {
             opacity: 1;
             animation: fadeFromZero 3.5s forwards;
         }
     }
 }
+
 .form {
     display: flex;
     flex-direction: column;
@@ -51,6 +52,7 @@
         justify-content: center;
         align-items: center;
     }
+
     &__word {
         display: flex;
         position: relative;
@@ -61,6 +63,7 @@
             display: flex;
             flex-wrap: wrap;
         }
+
         &-input {
             display: flex;
             flex: 0 1 50%;
@@ -70,15 +73,18 @@
             }
         }
     }
+
     &__buttons-lang {
         display: flex;
         .form__btn-lang:first-child {
             margin-right: 10px;
         }
+
         &--extra {
             justify-content: space-between;
         }
     }
+
     &__btn-lang {
         margin-top: 5px;
         padding: 0;
@@ -87,6 +93,7 @@
         border: none;
         text-align: left;
     }
+
     &__link {
         position: absolute;
         top: 0;
@@ -94,6 +101,7 @@
         width: 100%;
         height: 100%;
     }
+
     &__button {
         &-add {
             background-color: transparent;
@@ -102,10 +110,11 @@
             margin-top: 10px;
             width: 50px;
             cursor: pointer;
-            &:hover{
+            &:hover {
                 color: $learningWordTransp;
             }
         }
+
         &-remove {
             background-color: transparent;
             border: none;
@@ -117,6 +126,7 @@
             right: -4%;
             cursor: pointer;
         }
+        
         &-create {
             background-color: transparent;
             position: relative;
@@ -129,5 +139,4 @@
             @include hoverAnim($learningWordTransp);
         }
     }
-    
 }
