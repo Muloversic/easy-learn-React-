@@ -76,21 +76,19 @@ export default function NewSet() {
   useEffect(() => {
     if (isCreateSet) {
       const data = filterWordsData();
-      // console.log(collectionInfo);
-      // console.log(data);
       const db = getDatabase();
       const user = window.localStorage.getItem("User");
       if (data.length === 0) {
         setIsShowAlert(true);
         return;
       }
-      
-      data.forEach((userData) => {
-        if (!userData.word && !userData.translation) {
+
+      for (let i = 0; i < data.length; i++) {
+        if (!data[i].word || !data[i].translation) {
           setIsShowAlert(true);
           return;
         }
-      });
+      }
 
       try {
         set(ref(db, `UsersList/${user}/sets/${collectionInfo.setName}`), {
