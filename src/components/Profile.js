@@ -44,8 +44,8 @@ export default function Profile() {
       <div className="main__container">
         <div className="main__profile profile">
           <div className="profile__user">
-            {window.localStorage.getItem("UserPhoto") !== "" &&
-            window.localStorage.getItem("UserPhoto") !== "undefined" ? (
+            {window.localStorage.getItem("UserPhoto") === "" ||
+            window.localStorage.getItem("UserPhoto") !== 'undefined' ? (
               <img
                 className="settings__preview-photo"
                 src={window.localStorage.getItem("UserPhoto")}

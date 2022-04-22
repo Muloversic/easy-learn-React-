@@ -21,7 +21,7 @@ export default function Settings() {
     userNickname: window.localStorage.getItem("User") || "GoodLearner7",
     userPhoto: window.localStorage.getItem("UserPhoto") || "",
   });
-    console.log(window.localStorage.getItem("UserPhoto"))
+
   useEffect(() => {
     const storage = getStorage();
     const currentUser = localStorage.getItem("User");
@@ -104,7 +104,6 @@ export default function Settings() {
       const currentUser = localStorage.getItem("User");
       // if user from LS doesn't match with db users - create new user
       if (!usersArray.includes(currentUser)) {
-        console.log("new user was created");
         set(ref_database(db, `/UsersList/${currentUser}`), {
           sets: "",
           userPhotoURL: preview.userPhoto,
