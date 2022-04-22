@@ -84,6 +84,7 @@
         border: 1px solid $white;
         color: $white;
         padding: 10px 15px;
+        cursor: pointer;
         @include hoverAnim($learningWordTransp);
     }
 }

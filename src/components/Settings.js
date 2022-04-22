@@ -21,7 +21,7 @@ export default function Settings() {
     userNickname: window.localStorage.getItem("User") || "GoodLearner7",
     userPhoto: window.localStorage.getItem("UserPhoto") || "",
   });
-
+    console.log(window.localStorage.getItem("UserPhoto"))
   useEffect(() => {
     const storage = getStorage();
     const currentUser = localStorage.getItem("User");
@@ -78,6 +78,7 @@ export default function Settings() {
       const currentUser = localStorage.getItem("User");
       for (let userNickname in data) {
         if (userNickname === currentUser) {
+          console.log(data[userNickname].userPhotoURL)
           localStorage.setItem("UserPhoto", data[userNickname].userPhotoURL);
           setPreview((userData) => ({
             ...userData,
