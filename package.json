@@ -2,11 +2,13 @@
   "name": "easy-learn",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://muloversic.github.io/easy-learn-React-/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "firebase": "^9.6.10",
+    "gh-pages": "^3.2.3",
     "materialize-css": "^1.0.0-rc.2",
     "nanoid": "^3.1.28",
     "react": "^17.0.2",
@@ -21,7 +23,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build",
+    "predeploy": "npm run build"
   },
   "eslintConfig": {
     "extends": [
