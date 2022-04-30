@@ -1,4 +1,5 @@
 @import "./variables.scss";
+@import "./mixins.scss";
 .settings {
     display: flex;
     flex-direction: column;
@@ -138,5 +139,27 @@
         align-items: center;
         justify-content: center;
         border-right: 1px solid #fff;
+    }
+    &__button {
+        background-color: transparent;
+        position: relative;
+        border: 1px solid $white;
+        color: $white;
+        text-align: center;
+        margin: 10px 0;
+        padding: 10px 25px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        @include hoverAnim($learningWordTransp);
+        &-link {
+            color: inherit;
+            text-decoration: none;
+            position: absolute;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
     }
 }

@@ -13,6 +13,7 @@ import {
 } from "firebase/database";
 
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function Settings() {
     const [file, setFile] = useState("");
@@ -206,6 +207,13 @@ export default function Settings() {
                         <p className="settings__download-progress">
                             {downloadProgress}
                         </p>
+                        <button className="settings__button">
+                            Go to sets as you're done here
+                            <Link
+                                to="/sets"
+                                className="settings__button-link"
+                            ></Link>
+                        </button>
                     </div>
                 </div>
             </div>
