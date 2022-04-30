@@ -137,7 +137,7 @@ export default function Settings() {
                         <h2 className="settings__user-title">
                             Choose profile photo and wirte your nickname
                             <br />
-                            <span className="settings__user-info settings__user-info--warning">
+                            <span className="settings__user-info settings__user-info--danger">
                                 *all changes are automatically saved
                             </span>
                             <br />
