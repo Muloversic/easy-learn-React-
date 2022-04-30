@@ -1,6 +1,4 @@
-$base-color: #191a35;
-$white: #fff;
-$burger-bg: rgb(164, 155, 252);
+@import "./variables.scss";
 @import "./keyframes.scss";
 .header {
     position: fixed;
