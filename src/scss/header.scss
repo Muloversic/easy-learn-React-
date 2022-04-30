@@ -14,8 +14,6 @@ $burger-bg: rgb(164, 155, 252);
 }
 
 .navigation {
-    display: flex;
-    justify-content: center;
     &__burger {
         display: none;
         position: fixed;
@@ -32,7 +30,7 @@ $burger-bg: rgb(164, 155, 252);
         &-btn {
             position: fixed;
             z-index: 1;
-            top: 2%;
+            top: 1%;
             left: 0;
             color: $white;
             border: none;
@@ -83,7 +81,7 @@ $burger-bg: rgb(164, 155, 252);
             }
         }
     }
-    
+
     &__link {
         color: inherit;
     }
