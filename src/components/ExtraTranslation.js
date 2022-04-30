@@ -12,7 +12,6 @@ export default function ExtraTranslation({ id, getData, removeExtraTrasnl }) {
             />
 
             <div className="form__buttons-lang form__buttons-lang--extra">
-                <button className="form__btn-lang">Choose language</button>
                 <button
                     className="form__btn-lang"
                     onClick={(event) => removeExtraTrasnl(event, id)}

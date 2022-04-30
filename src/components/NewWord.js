@@ -128,7 +128,6 @@ export default function NewWord(props) {
                         className="form__input form__input--new-word"
                         onChange={(event) => getData(event.target, props.id)}
                     />
-                    <button className="form__btn-lang">Choose language</button>
                 </div>
                 <div className="form__word-input">
                     <label className="form__label form__label--new-word">
@@ -146,9 +145,6 @@ export default function NewWord(props) {
                             onClick={addExtraTrasnl}
                         >
                             Add one more language
-                        </button>
-                        <button className="form__btn-lang">
-                            Choose language
                         </button>
                     </div>
                 </div>
