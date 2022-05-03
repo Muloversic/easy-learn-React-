@@ -12,6 +12,7 @@
         color: $white;
         font-size: 1.25rem;
         text-align: center;
+        margin-top: 20px;
     }
 
     &__list {
@@ -88,11 +89,11 @@
         left: 50%;
         transform: translate(-50%, -50%);
         font-size: 1.05rem;
-        background-color: $primary;
+        background-color: $button;
         border: 1px solid $white;
         color: $white;
         padding: 10px 15px;
         cursor: pointer;
-        @include hoverAnim($learningWordTransp);
+        @include hoverAnim($buttonHover);
     }
 }

@@ -18,21 +18,21 @@
 
     &__button-create {
         font-size: 1.05rem;
-        background-color: $primary;
+        background-color: $button;
         border: 1px solid $white;
         color: $white;
         padding: 10px 15px;
         position: relative;
         cursor: pointer;
-        @include hoverAnim($learningWordTransp);
+        @include hoverAnim($buttonHover);
     }
 
     &__item {
         display: flex;
         flex-direction: column;
         position: relative;
-        color: $white;
-        background-color: $setItemBg;
+        color: $simpleTextDark;
+        background-color: $white;
         padding: 10px 15px;
         margin: 10px 0;
         width: 170px;
@@ -46,7 +46,7 @@
             width: 280px;
         }
 
-        @include hoverAnim($learningWordTransp);
+        @include hoverAnim($buttonHover);
 
         &-info {
             margin-bottom: 5px;

@@ -68,7 +68,7 @@
             @include hoverAnim($dangerDisabled);
         }
 
-        @include hoverAnim($learningWordTransp);
+        @include hoverAnim($buttonHover);
     }
 
     &__link {
