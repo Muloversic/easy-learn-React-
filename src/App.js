@@ -4,20 +4,20 @@ import {
     Route,
     Navigate,
     useNavigate,
-} from "react-router-dom";
-import { getDatabase, ref, set } from "firebase/database";
-import "./scss/index.scss";
-import Header from "./components/Header";
-import Settings from "./components/Settings";
-import Sets from "./components/Sets";
-import NewSet from "./components/NewSet";
-import OpenSet from "./components/OpenSet";
-import StudySet from "./components/StudySet";
-import Welcome from "./components/Welcome";
-import Profile from "./components/Profile";
+} from 'react-router-dom';
+import { getDatabase, ref, set } from 'firebase/database';
+import './scss/index.scss';
+import Header from './components/Header';
+import Settings from './components/Settings';
+import Sets from './components/Sets';
+import NewSet from './components/NewSet';
+import OpenSet from './components/OpenSet';
+import StudySet from './components/StudySet';
+import Welcome from './components/Welcome';
+import Profile from './components/Profile';
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { useEffect, useState } from "react";
+import { initializeApp } from 'firebase/app';
+import { useEffect, useState } from 'react';
 // import { useNavigate } from "react-router-dom";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -25,13 +25,13 @@ import { useEffect, useState } from "react";
 function App() {
     // Your web app's Firebase configuration
     const firebaseConfig = {
-        apiKey: "AIzaSyAyIMCboUIMW3D6RntFba1uzIoE6gkjoV4",
-        authDomain: "easy-learm.firebaseapp.com",
-        databaseURL: "https://easy-learm-default-rtdb.firebaseio.com",
-        projectId: "easy-learm",
-        storageBucket: "easy-learm.appspot.com",
-        messagingSenderId: "606003653726",
-        appId: "1:606003653726:web:c60c75b6676cb64c3098cf",
+        apiKey: 'AIzaSyAyIMCboUIMW3D6RntFba1uzIoE6gkjoV4',
+        authDomain: 'easy-learm.firebaseapp.com',
+        databaseURL: 'https://easy-learm-default-rtdb.firebaseio.com',
+        projectId: 'easy-learm',
+        storageBucket: 'easy-learm.appspot.com',
+        messagingSenderId: '606003653726',
+        appId: '1:606003653726:web:c60c75b6676cb64c3098cf',
     };
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
@@ -40,58 +40,58 @@ function App() {
     const [studyPresets, setStudyPresets] = useState(false);
     const subLinks = [
         {
-            href: "/sets",
-            icon: "format_align_left",
+            href: '/sets',
+            icon: 'format_align_left',
         },
         {
-            href: "/profile",
-            icon: "person_outline",
+            href: '/profile',
+            icon: 'person_outline',
         },
         {
-            href: "/settings",
-            icon: "settings",
+            href: '/settings',
+            icon: 'settings',
         },
     ];
 
     const links = [
         //value should be string
         {
-            value: "EasyLearn",
-            href: "/",
+            value: 'EasyLearn',
+            href: '/',
         },
         {
-            value: "",
-            href: "/",
-            icon: "book",
+            value: '',
+            href: '/',
+            icon: 'book',
         },
         {
             value: {
                 //key represtns current page
                 settings: {
-                    subValue: "settings",
+                    subValue: 'settings',
                 },
                 sets: {
-                    subValue: "Add new set +",
-                    href: "/new-set",
+                    subValue: 'Add new set +',
+                    href: '/new-set',
                 },
                 profile: {
-                    subValue: "profile",
-                    href: "/profile",
+                    subValue: 'profile',
+                    href: '/profile',
                 },
-                ["new-set"]: {
-                    subValue: "Creating new set",
-                    href: "/new-set",
+                ['new-set']: {
+                    subValue: 'Creating new set',
+                    href: '/new-set',
                 },
-                ["open-set"]: {
-                    subValue: "Set info",
-                    href: "/open-set",
+                ['open-set']: {
+                    subValue: 'Set info',
+                    href: '/open-set',
                 },
                 learning: {
-                    subValue: "learning",
-                    href: "/learning",
+                    subValue: 'learning',
+                    href: '/learning',
                 },
-                [""]: {
-                    subValue: "Welcome",
+                ['']: {
+                    subValue: 'Welcome',
                 },
             },
         },
@@ -99,9 +99,9 @@ function App() {
 
     let navigateUser = useNavigate();
     useEffect(() => {
-        const currentUser = localStorage.getItem("User");
+        const currentUser = localStorage.getItem('User');
         if (!currentUser) {
-            navigateUser("/");
+            navigateUser('/');
         }
     }, []);
 
@@ -111,15 +111,17 @@ function App() {
         <div className="App">
             <Header links={links} subLinks={subLinks} />
             <Routes>
-                <Route path="/" element={<Welcome />} />
-                <Route path="/settings" element={<Settings />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="/" exact element={<Welcome />} />
+                <Route path="/settings" exact element={<Settings />} />
+                <Route path="/profile" exact element={<Profile />} />
                 <Route
+                    exact
                     path="/sets"
                     element={<Sets setCollectionData={setCollectionData} />}
                 />
-                <Route path="/new-set" element={<NewSet />} />
+                <Route path="/new-set" exact element={<NewSet />} />
                 <Route
+                    exact
                     path="/open-set"
                     element={
                         collectionData ? (
@@ -146,15 +148,7 @@ function App() {
                         )
                     }
                 />
-                <Route
-                    path="*"
-                    element={
-                        <main style={{ padding: "1rem" }}>
-                            <p>There's nothing here!</p>
-                        </main>
-                    }
-                />
-                )
+                <Route path="*" element={<Navigate replace to="/" />} />)
             </Routes>
         </div>
     );

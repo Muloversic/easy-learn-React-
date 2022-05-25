@@ -1,5 +1,5 @@
-import { getDatabase, ref, onValue } from "firebase/database";
-import { useEffect, useState } from "react";
+import { getDatabase, ref, onValue } from 'firebase/database';
+import { useEffect, useState } from 'react';
 export default function Profile() {
     const [stats, setStats] = useState({
         words: 0,
@@ -8,7 +8,7 @@ export default function Profile() {
         setsProgress: 0,
     });
     useEffect(() => {
-        const user = localStorage.getItem("User");
+        const user = localStorage.getItem('User');
         const db = getDatabase();
         const sets = ref(db, `UsersList/${user}/sets/`);
         onValue(sets, (snapshot) => {
@@ -44,12 +44,12 @@ export default function Profile() {
             <div className="main__container">
                 <div className="main__profile profile">
                     <div className="profile__user">
-                        {window.localStorage.getItem("UserPhoto") === "" ||
-                        window.localStorage.getItem("UserPhoto") !==
-                            "undefined" ? (
+                        {window.localStorage.getItem('UserPhoto') === '' ||
+                        window.localStorage.getItem('UserPhoto') !==
+                            'undefined' ? (
                             <img
                                 className="settings__preview-photo"
-                                src={window.localStorage.getItem("UserPhoto")}
+                                src={window.localStorage.getItem('UserPhoto')}
                                 alt="user"
                             />
                         ) : (
@@ -58,8 +58,8 @@ export default function Profile() {
                             </i>
                         )}
                         <p className="profile__user-name">
-                            {window.localStorage.getItem("User") ||
-                                "GoodLearner7"}
+                            {window.localStorage.getItem('User') ||
+                                'GoodLearner7'}
                         </p>
                     </div>
                     <div className="profile__statistic">
@@ -77,7 +77,7 @@ export default function Profile() {
                                 Amount of sets: {stats.sets}
                             </li>
                             <li className="profile__list-item">
-                                Average percent of sets progress:{" "}
+                                Average percent of sets progress:{' '}
                                 {stats.setsProgress} %
                             </li>
                         </ul>
