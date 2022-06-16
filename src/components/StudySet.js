@@ -208,7 +208,6 @@ export default function StudySet({ wordsToLearn, studyPresets }) {
         if (word.id === rightWord.id) {
           if (word.rightAnswers < 14) {
             word.progress += 5;
-            console.log(word);
           } else {
             word.progress += 10;
           }

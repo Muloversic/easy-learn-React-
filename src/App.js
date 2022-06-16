@@ -105,7 +105,6 @@ function App() {
         }
     }, []);
 
-    // console.log(currentUser);
 
     return (
         <div className="App">
